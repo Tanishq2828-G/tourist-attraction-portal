@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (clearAllBtn) {
     clearAllBtn.addEventListener('click', () => {
       if (confirm('Are you sure you want to remove all saved favorites?')) {
-        localStorage.removeItem(STORAGE_KEY_FAVORITES);
+        localStorage.removeItem('tourist_portal_favorites');
         FavoritesManager.updateBadges();
         showToast('All saved favorites have been cleared.', 'info');
         loadFavorites();
@@ -93,3 +93,4 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   await loadFavorites();
 });
+

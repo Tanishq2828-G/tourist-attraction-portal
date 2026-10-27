@@ -478,3 +478,4 @@ module.exports = {
   sampleDestinations,
   seedDatabase
 };
+

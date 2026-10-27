@@ -1,5 +1,6 @@
 /**
- * Destinations Page Logic - Filter, Search, Sort, and Paginated Listing
+ * Destinations Page Logic - Simple & User-Friendly
+ * Handles search, category/state filters, sorting, and pagination.
  */
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -14,12 +15,11 @@ document.addEventListener('DOMContentLoaded', async () => {
   const loadMoreBtn = document.getElementById('destLoadMoreBtn');
   const loadMoreWrapper = document.getElementById('destLoadMoreWrapper');
 
-  // State
   let allDestinations = [];
   let displayedCount = 9;
   const PAGE_SIZE = 9;
 
-  // Read URL query parameters (e.g. ?search=fort or ?category=Historical%20Monuments)
+  // Read URL query parameters (e.g. ?search=Charminar or ?category=Historical%20Monuments)
   const urlParams = new URLSearchParams(window.location.search);
   const initialQuery = urlParams.get('search') || urlParams.get('q') || '';
   const initialCategory = urlParams.get('category') || '';
@@ -27,8 +27,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   if (searchInput && initialQuery) searchInput.value = initialQuery;
 
-  // Initialize Filter Dropdowns
-  async function loadFilterOptions() {
+  // Populate filter dropdowns from backend
+  async function loadFilterDropdowns() {
     try {
       const [categoriesRes, statesRes] = await Promise.all([
         ApiService.getCategories(),
@@ -63,31 +63,17 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   }
 
-  // Show Skeleton Loaders
-  function renderSkeletons() {
-    if (!gridContainer) return;
-    gridContainer.innerHTML = Array(6).fill(0).map(() => `
-      <div class="col-lg-4 col-md-6 mb-4">
-        <div class="destination-card">
-          <div class="card-img-wrapper skeleton"></div>
-          <div class="card-body-content">
-            <div class="skeleton mb-2" style="height: 18px; width: 40%;"></div>
-            <div class="skeleton mb-3" style="height: 26px; width: 75%;"></div>
-            <div class="skeleton mb-2" style="height: 14px; width: 100%;"></div>
-            <div class="skeleton mb-4" style="height: 14px; width: 85%;"></div>
-            <div class="d-flex justify-content-between pt-3 border-top">
-              <div class="skeleton" style="height: 20px; width: 30%;"></div>
-              <div class="skeleton" style="height: 34px; width: 35%; border-radius: 8px;"></div>
-            </div>
-          </div>
+  // Fetch destinations from backend API
+  async function fetchDestinations() {
+    if (gridContainer) {
+      gridContainer.innerHTML = `
+        <div class="col-12 text-center py-5">
+          <div class="spinner-border text-primary" role="status"></div>
+          <p class="text-muted mt-2">Loading destinations...</p>
         </div>
-      </div>
-    `).join('');
-  }
+      `;
+    }
 
-  // Fetch from API and render
-  async function fetchAndRenderDestinations() {
-    renderSkeletons();
     if (emptyState) emptyState.style.display = 'none';
     if (loadMoreWrapper) loadMoreWrapper.style.display = 'none';
 
@@ -103,16 +89,14 @@ document.addEventListener('DOMContentLoaded', async () => {
       allDestinations = response.data || [];
       displayedCount = PAGE_SIZE;
 
-      renderCurrentList();
+      renderDestinations();
     } catch (err) {
       console.error('Error fetching destinations:', err);
       if (gridContainer) {
         gridContainer.innerHTML = `
-          <div class="col-12 py-5 text-center">
-            <div class="alert alert-danger d-inline-block px-4 py-3">
-              <i class="fas fa-exclamation-circle me-2"></i>
-              Unable to load destinations. Ensure the backend server is running at 
-              <strong>${window.location.origin}</strong>.
+          <div class="col-12 py-4 text-center">
+            <div class="alert alert-danger d-inline-block">
+              Unable to load destinations from backend.
             </div>
           </div>
         `;
@@ -120,20 +104,21 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   }
 
-  function renderCurrentList() {
+  // Render list to screen
+  function renderDestinations() {
     if (!gridContainer) return;
 
     if (allDestinations.length === 0) {
       gridContainer.innerHTML = '';
       if (emptyState) emptyState.style.display = 'block';
-      if (resultsCount) resultsCount.textContent = '0 destinations';
+      if (resultsCount) resultsCount.textContent = '0 destinations found';
       if (loadMoreWrapper) loadMoreWrapper.style.display = 'none';
       return;
     }
 
     if (emptyState) emptyState.style.display = 'none';
     if (resultsCount) {
-      resultsCount.textContent = `${allDestinations.length} destination${allDestinations.length > 1 ? 's' : ''}`;
+      resultsCount.textContent = `${allDestinations.length} destination${allDestinations.length > 1 ? 's' : ''} found`;
     }
 
     const itemsToDisplay = allDestinations.slice(0, displayedCount);
@@ -150,42 +135,41 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   }
 
-  // Load More Click
+  // Load More button click
   if (loadMoreBtn) {
     loadMoreBtn.addEventListener('click', () => {
       displayedCount += PAGE_SIZE;
-      renderCurrentList();
+      renderDestinations();
     });
   }
 
-  // Debounced search
+  // Debounced search typing
   let debounceTimeout;
   if (searchInput) {
     searchInput.addEventListener('input', () => {
       clearTimeout(debounceTimeout);
       debounceTimeout = setTimeout(() => {
-        fetchAndRenderDestinations();
-      }, 350);
+        fetchDestinations();
+      }, 300);
     });
   }
 
-  // Filter Changes
-  if (categoryFilter) categoryFilter.addEventListener('change', fetchAndRenderDestinations);
-  if (stateFilter) stateFilter.addEventListener('change', fetchAndRenderDestinations);
-  if (sortSelect) sortSelect.addEventListener('change', fetchAndRenderDestinations);
+  // Filter change handlers
+  if (categoryFilter) categoryFilter.addEventListener('change', fetchDestinations);
+  if (stateFilter) stateFilter.addEventListener('change', fetchDestinations);
+  if (sortSelect) sortSelect.addEventListener('change', fetchDestinations);
 
-  // Clear Filters Button
+  // Clear filters
   if (clearBtn) {
     clearBtn.addEventListener('click', () => {
       if (searchInput) searchInput.value = '';
       if (categoryFilter) categoryFilter.value = '';
       if (stateFilter) stateFilter.value = '';
       if (sortSelect) sortSelect.value = 'name_asc';
-      fetchAndRenderDestinations();
+      fetchDestinations();
     });
   }
 
-  // Reset button in empty state
   const resetEmptyBtn = document.getElementById('resetEmptyBtn');
   if (resetEmptyBtn) {
     resetEmptyBtn.addEventListener('click', () => {
@@ -193,7 +177,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
   }
 
-  // Initialize
-  await loadFilterOptions();
-  await fetchAndRenderDestinations();
+  // Run initialization
+  await loadFilterDropdowns();
+  await fetchDestinations();
 });

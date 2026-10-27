@@ -1,12 +1,12 @@
 /**
- * Destination Details View Logic
- * Dynamically loads and renders full attraction information from the backend API.
+ * Destination Details View Logic - Simple & Student-Friendly
+ * Fetches single destination data from API by ID and renders clean HTML.
  */
 
 document.addEventListener('DOMContentLoaded', async () => {
   const container = document.getElementById('detailsContainer');
-  const breadcrumbName = document.getElementById('breadcrumbName');
-  const fallbackImg = '/images/placeholder.svg';
+  const breadcrumbTitle = document.getElementById('breadcrumbTitle');
+  const fallbackImg = 'images/placeholder.svg';
 
   const urlParams = new URLSearchParams(window.location.search);
   const destinationId = urlParams.get('id');
@@ -15,12 +15,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (container) {
       container.innerHTML = `
         <div class="text-center py-5">
-          <i class="fas fa-map-marked-alt fa-4x text-muted mb-3"></i>
-          <h2>No Destination Selected</h2>
-          <p class="text-muted">Please choose a tourist destination from our catalog to view its details.</p>
-          <a href="destinations.html" class="btn btn-primary mt-3">
-            <i class="fas fa-compass me-2"></i>Browse Destinations
-          </a>
+          <i class="fas fa-exclamation-circle fa-3x text-warning mb-3"></i>
+          <h4>No Destination Selected</h4>
+          <p class="text-muted">Please select an attraction from our catalog to see its details.</p>
+          <a href="destinations.html" class="btn btn-primary mt-2">Browse Destinations</a>
         </div>
       `;
     }
@@ -31,216 +29,179 @@ document.addEventListener('DOMContentLoaded', async () => {
     const response = await ApiService.getDestinationById(destinationId);
     const dest = response.data;
 
-    // Update document title and breadcrumb
+    // Set page title and breadcrumb
     document.title = `${dest.name} - Tourist Attraction Portal`;
-    if (breadcrumbName) breadcrumbName.textContent = dest.name;
+    if (breadcrumbTitle) breadcrumbTitle.textContent = dest.name;
 
     const isFav = FavoritesManager.isFavorite(dest.id);
 
-    // Build facility icon mapper
-    function getFacilityIcon(name) {
-      const lower = name.toLowerCase();
-      if (lower.includes('park')) return 'fa-parking';
-      if (lower.includes('water')) return 'fa-tint';
-      if (lower.includes('restroom') || lower.includes('toilet')) return 'fa-restroom';
-      if (lower.includes('guide')) return 'fa-user-tie';
-      if (lower.includes('wheelchair') || lower.includes('ramp')) return 'fa-wheelchair';
-      if (lower.includes('restaurant') || lower.includes('cafe') || lower.includes('food') || lower.includes('dining')) return 'fa-utensils';
-      if (lower.includes('shop') || lower.includes('souvenir') || lower.includes('market')) return 'fa-store';
-      if (lower.includes('boat') || lower.includes('ferry')) return 'fa-ship';
-      if (lower.includes('train') || lower.includes('rail')) return 'fa-train';
-      if (lower.includes('atm')) return 'fa-credit-card';
-      if (lower.includes('audio')) return 'fa-headphones';
-      return 'fa-check-circle';
-    }
-
-    // Build facilities markup
-    const facilitiesList = Array.isArray(dest.facilities) ? dest.facilities : [];
-    const facilitiesMarkup = facilitiesList.length > 0 
-      ? facilitiesList.map(f => `
-          <span class="facility-pill">
-            <i class="fas ${getFacilityIcon(f)}"></i> ${f}
-          </span>
-        `).join('')
-      : '<span class="text-muted">Information currently not listed. Please check on arrival.</span>';
-
-    // Build gallery thumbnails
+    // Render gallery thumbnails
     const gallery = Array.isArray(dest.gallery_urls) && dest.gallery_urls.length > 0
       ? dest.gallery_urls
       : [dest.image_url];
 
-    const galleryThumbsMarkup = gallery.length > 1
+    const galleryHtml = gallery.length > 1
       ? `
-        <div class="gallery-thumbs mt-3">
-          ${gallery.map((url, idx) => `
-            <div class="gallery-thumb-item ${idx === 0 ? 'active' : ''}" onclick="changeMainImage('${url}', this)">
-              <img src="${url}" alt="Thumbnail ${idx + 1}" onerror="this.onerror=null; this.src='${fallbackImg}';">
-            </div>
-          `).join('')}
+        <div class="mt-2 mb-3">
+          <small class="text-muted fw-bold d-block mb-1">More Photographs:</small>
+          <div class="d-flex flex-wrap">
+            ${gallery.map((url, idx) => `
+              <img 
+                src="${url}" 
+                alt="Photo ${idx+1}" 
+                class="gallery-thumb ${idx === 0 ? 'active' : ''}" 
+                onclick="changeDetailImage('${url}', this)"
+                onerror="this.onerror=null; this.src='${fallbackImg}';"
+              >
+            `).join('')}
+          </div>
         </div>
       `
       : '';
 
-    // Nearby attractions links/badges
+    // Render Facilities Badges
+    const facilitiesList = Array.isArray(dest.facilities) ? dest.facilities : [];
+    const facilitiesHtml = facilitiesList.length > 0
+      ? facilitiesList.map(f => `<span class="facility-badge"><i class="fas fa-check text-success me-1"></i>${f}</span>`).join('')
+      : '<span class="text-muted small">Information not listed. Please check on arrival.</span>';
+
+    // Render Nearby Attractions
     const nearbyList = dest.nearby_attractions 
       ? dest.nearby_attractions.split(',').map(s => s.trim()).filter(Boolean)
       : [];
-    
-    const nearbyMarkup = nearbyList.length > 0
-      ? nearbyList.map(item => `
-          <span class="badge bg-light text-dark border p-2 me-2 mb-2" style="font-size: 0.9rem;">
-            <i class="fas fa-map-pin text-primary me-1"></i>${item}
-          </span>
-        `).join('')
-      : '<p class="text-muted">No nearby landmarks listed.</p>';
+    const nearbyHtml = nearbyList.length > 0
+      ? nearbyList.map(n => `<span class="badge bg-light text-dark border p-2 me-2 mb-2"><i class="fas fa-map-marker-alt text-danger me-1"></i>${n}</span>`).join('')
+      : '<span class="text-muted small">No nearby attractions listed.</span>';
 
-    // Google Maps link
+    // Google Maps URL
     const mapsQuery = dest.latitude && dest.longitude 
       ? `${dest.latitude},${dest.longitude}`
       : encodeURIComponent(`${dest.name}, ${dest.city}, ${dest.state}`);
-    const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${mapsQuery}`;
+    const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${mapsQuery}`;
 
-    // Render full details view
     container.innerHTML = `
-      <div class="row mb-4">
-        <div class="col-12">
-          <!-- Back button and Actions -->
-          <div class="d-flex flex-wrap justify-content-between align-items-center mb-3 gap-2">
-            <a href="destinations.html" class="btn btn-outline-secondary btn-sm rounded-pill px-3">
-              <i class="fas fa-arrow-left me-1"></i> Back to Destinations
-            </a>
-            <div class="d-flex gap-2">
-              <button 
-                id="detailsFavBtn" 
-                class="btn ${isFav ? 'btn-danger' : 'btn-outline-danger'} btn-sm rounded-pill px-3"
-                onclick="toggleDetailsFavorite(${dest.id})"
-              >
-                <i class="${isFav ? 'fas' : 'far'} fa-heart me-1"></i>
-                <span id="detailsFavText">${isFav ? 'In Favorites' : 'Add to Favorites'}</span>
-              </button>
-              <a href="${googleMapsUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-primary btn-sm rounded-pill px-3">
-                <i class="fas fa-external-link-alt me-1"></i> Open in Google Maps
-              </a>
-            </div>
-          </div>
-
-          <!-- Hero Image & Title Overlay -->
-          <div class="details-hero">
-            <img 
-              id="mainDetailsImg"
-              src="${dest.image_url || fallbackImg}" 
-              alt="${dest.name}" 
-              onerror="this.onerror=null; this.src='${fallbackImg}';"
-            >
-            <div class="details-hero-overlay">
-              <div class="details-badge-row">
-                <span class="badge-tag">
-                  <i class="fas fa-tag me-1"></i>${dest.category}
-                </span>
-                <span class="badge-tag">
-                  <i class="fas fa-map-marker-alt me-1"></i>${dest.city}, ${dest.state}
-                </span>
-              </div>
-              <h1 class="display-5 fw-extrabold text-white mb-1">${dest.name}</h1>
-              ${dest.address ? `<p class="text-light mb-0 small"><i class="fas fa-location-arrow me-1"></i>${dest.address}</p>` : ''}
-            </div>
-          </div>
-
-          ${galleryThumbsMarkup}
+      <!-- Action Toolbar -->
+      <div class="d-flex flex-wrap justify-content-between align-items-center mb-3">
+        <a href="destinations.html" class="btn btn-outline-secondary btn-sm">
+          <i class="fas fa-arrow-left me-1"></i> Back to Destinations
+        </a>
+        <div class="d-flex gap-2">
+          <button 
+            id="detailFavBtn" 
+            class="btn btn-sm ${isFav ? 'btn-danger' : 'btn-outline-danger'}"
+            onclick="toggleDetailFavorite(${dest.id})"
+          >
+            <i class="${isFav ? 'fas' : 'far'} fa-heart me-1"></i>
+            <span id="detailFavText">${isFav ? 'Saved in Favorites' : 'Add to Favorites'}</span>
+          </button>
+          <a href="${mapsUrl}" target="_blank" class="btn btn-sm btn-outline-primary">
+            <i class="fas fa-external-link-alt me-1"></i> Open Google Maps
+          </a>
         </div>
       </div>
 
       <div class="row">
-        <!-- Left Column: Description & Content -->
+        <!-- Left Column: Image, Description, Facilities -->
         <div class="col-lg-8">
-          <div class="details-card">
-            <h2 class="details-card-title">
-              <i class="fas fa-info-circle text-primary"></i> About the Attraction
-            </h2>
-            <p class="lead text-dark" style="font-size: 1.05rem; line-height: 1.75;">
+          <div class="info-box">
+            <!-- Main Title & Badges -->
+            <div class="d-flex flex-wrap align-items-center gap-2 mb-2">
+              <span class="badge bg-primary">${dest.category}</span>
+              <span class="badge bg-success"><i class="fas fa-map-marker-alt me-1"></i>${dest.city}, ${dest.state}</span>
+            </div>
+            
+            <h1 class="h2 fw-bold text-dark mb-1">${dest.name}</h1>
+            ${dest.address ? `<p class="text-muted small mb-3"><i class="fas fa-location-dot me-1 text-danger"></i>${dest.address}</p>` : ''}
+
+            <!-- Large Photograph -->
+            <img 
+              id="mainDetailImg"
+              src="${dest.image_url || fallbackImg}" 
+              alt="${dest.name}" 
+              class="detail-main-img"
+              onerror="this.onerror=null; this.src='${fallbackImg}';"
+            >
+
+            ${galleryHtml}
+
+            <!-- Detailed Description -->
+            <h4 class="fw-bold text-dark mt-4 mb-2"><i class="fas fa-align-left text-primary me-2"></i>About the Attraction</h4>
+            <p style="font-size: 1rem; color: #444; line-height: 1.7;">
               ${dest.description}
             </p>
 
+            <!-- Travel Tips Box -->
             ${dest.travel_tips ? `
-              <div class="mt-4 p-3 bg-light rounded-3 border">
-                <h5 class="fw-bold text-dark mb-2">
-                  <i class="fas fa-lightbulb text-warning me-2"></i>Visitor Travel Tips
-                </h5>
-                <p class="mb-0 text-muted" style="font-size: 0.95rem;">${dest.travel_tips}</p>
+              <div class="bg-light p-3 rounded border my-3">
+                <h5 class="fw-bold mb-1 text-dark"><i class="fas fa-lightbulb text-warning me-2"></i>Travel Tips</h5>
+                <p class="small text-muted mb-0">${dest.travel_tips}</p>
               </div>
             ` : ''}
 
-            <div class="notice-box">
+            <!-- Available Facilities -->
+            <h4 class="fw-bold text-dark mt-4 mb-2"><i class="fas fa-concierge-bell text-success me-2"></i>Available Facilities</h4>
+            <div class="d-flex flex-wrap mb-3">
+              ${facilitiesHtml}
+            </div>
+
+            <!-- Nearby Attractions -->
+            <h4 class="fw-bold text-dark mt-4 mb-2"><i class="fas fa-compass text-primary me-2"></i>Nearby Attractions</h4>
+            <div class="d-flex flex-wrap mb-2">
+              ${nearbyHtml}
+            </div>
+
+            <!-- Verification Notice -->
+            <div class="verification-notice">
               <i class="fas fa-exclamation-triangle me-1"></i>
-              <strong>Notice:</strong> Information provided is for academic demonstration and general tourism reference. Official opening hours, entry fees, and seasonal rules are subject to change by local authorities. Please verify before visiting.
-            </div>
-          </div>
-
-          <!-- Available Facilities -->
-          <div class="details-card">
-            <h2 class="details-card-title">
-              <i class="fas fa-concierge-bell text-secondary"></i> Available Tourist Facilities
-            </h2>
-            <div class="d-flex flex-wrap pt-2">
-              ${facilitiesMarkup}
-            </div>
-          </div>
-
-          <!-- Nearby Attractions -->
-          <div class="details-card">
-            <h2 class="details-card-title">
-              <i class="fas fa-compass text-primary"></i> Nearby Attractions & Landmarks
-            </h2>
-            <div class="pt-2">
-              ${nearbyMarkup}
+              <strong>Notice:</strong> Information provided is for educational & academic project purposes. Official visiting hours, admission tickets, and seasonal schedules should be verified before visiting.
             </div>
           </div>
         </div>
 
-        <!-- Right Column: Quick Facts & Maps -->
+        <!-- Right Column: Key Visitor Facts -->
         <div class="col-lg-4">
-          <div class="details-card sticky-top" style="top: 90px;">
-            <h3 class="details-card-title" style="font-size: 1.15rem;">
-              <i class="fas fa-clipboard-list text-primary"></i> Key Visitor Information
-            </h3>
-            
-            <table class="table info-table mb-3">
+          <div class="info-box">
+            <h4 class="h5 fw-bold text-dark border-bottom pb-2 mb-3">
+              <i class="fas fa-clipboard-list text-primary me-2"></i>Visitor Information
+            </h4>
+
+            <table class="table table-sm info-table mb-3">
               <tbody>
                 <tr>
-                  <td class="info-label"><i class="far fa-clock me-1 text-primary"></i> Timings</td>
-                  <td class="info-value">${dest.opening_hours || 'Please verify before visiting'}</td>
+                  <th><i class="far fa-clock text-primary me-1"></i> Timings</th>
+                  <td>${dest.opening_hours || 'Please verify before visiting'}</td>
                 </tr>
                 <tr>
-                  <td class="info-label"><i class="fas fa-ticket-alt me-1 text-primary"></i> Entry Fee</td>
-                  <td class="info-value">${dest.entry_fee || 'Please verify before visiting'}</td>
+                  <th><i class="fas fa-ticket-alt text-primary me-1"></i> Entry Fee</th>
+                  <td>${dest.entry_fee || 'Please verify before visiting'}</td>
                 </tr>
                 <tr>
-                  <td class="info-label"><i class="fas fa-calendar-alt me-1 text-primary"></i> Best Time</td>
-                  <td class="info-value">${dest.best_time_to_visit || 'October to March'}</td>
+                  <th><i class="fas fa-calendar-alt text-primary me-1"></i> Best Time</th>
+                  <td>${dest.best_time_to_visit || 'October to March'}</td>
                 </tr>
                 <tr>
-                  <td class="info-label"><i class="fas fa-hourglass-half me-1 text-primary"></i> Duration</td>
-                  <td class="info-value">${dest.recommended_duration || '2 to 3 hours'}</td>
+                  <th><i class="fas fa-hourglass-half text-primary me-1"></i> Duration</th>
+                  <td>${dest.recommended_duration || '2 to 3 hours'}</td>
                 </tr>
                 <tr>
-                  <td class="info-label"><i class="fas fa-wheelchair me-1 text-primary"></i> Accessibility</td>
-                  <td class="info-value" style="font-size: 0.85rem;">${dest.accessibility || 'Please verify before visiting'}</td>
+                  <th><i class="fas fa-wheelchair text-primary me-1"></i> Accessibility</th>
+                  <td class="small">${dest.accessibility || 'Please verify before visiting'}</td>
                 </tr>
                 ${dest.latitude && dest.longitude ? `
                   <tr>
-                    <td class="info-label"><i class="fas fa-crosshairs me-1 text-primary"></i> GPS Coordinates</td>
-                    <td class="info-value font-monospace small">${dest.latitude.toFixed(4)}° N, ${dest.longitude.toFixed(4)}° E</td>
+                    <th><i class="fas fa-map-pin text-primary me-1"></i> Coordinates</th>
+                    <td class="font-monospace small">${dest.latitude}° N, ${dest.longitude}° E</td>
                   </tr>
                 ` : ''}
               </tbody>
             </table>
 
-            <div class="d-grid gap-2 pt-2">
-              <a href="${googleMapsUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-primary fw-bold py-2 rounded-3">
-                <i class="fas fa-directions me-2"></i> Get Directions on Google Maps
+            <div class="d-grid gap-2">
+              <a href="${mapsUrl}" target="_blank" class="btn btn-primary fw-bold">
+                <i class="fas fa-map-marked-alt me-1"></i> View on Google Maps
               </a>
-              <a href="destinations.html?category=${encodeURIComponent(dest.category)}" class="btn btn-light border fw-semibold py-2 rounded-3">
-                <i class="fas fa-search me-2 text-muted"></i> More in ${dest.category}
+              <a href="destinations.html?category=${encodeURIComponent(dest.category)}" class="btn btn-outline-secondary btn-sm">
+                More in ${dest.category}
               </a>
             </div>
           </div>
@@ -249,48 +210,43 @@ document.addEventListener('DOMContentLoaded', async () => {
     `;
 
   } catch (err) {
-    console.error('Error fetching destination details:', err);
-    if (container) {
-      container.innerHTML = `
-        <div class="text-center py-5">
-          <div class="alert alert-danger d-inline-block p-4">
-            <i class="fas fa-exclamation-triangle fa-2x mb-2"></i>
-            <h4>Destination Not Found</h4>
-            <p class="mb-3">${err.message || 'The requested destination could not be loaded.'}</p>
-            <a href="destinations.html" class="btn btn-outline-danger">Back to Destinations Catalog</a>
-          </div>
+    console.error('Details fetch error:', err);
+    container.innerHTML = `
+      <div class="text-center py-5">
+        <div class="alert alert-danger d-inline-block">
+          <h5>Error Loading Destination</h5>
+          <p class="mb-2">${err.message || 'Could not fetch destination details.'}</p>
+          <a href="destinations.html" class="btn btn-outline-danger btn-sm">Back to Catalog</a>
         </div>
-      `;
-    }
+      </div>
+    `;
   }
 });
 
-// Image thumbnail click handler
-function changeMainImage(url, elem) {
-  const mainImg = document.getElementById('mainDetailsImg');
-  if (mainImg) {
-    mainImg.src = url;
-  }
-  document.querySelectorAll('.gallery-thumb-item').forEach(el => el.classList.remove('active'));
+// Switch main photo when thumbnail clicked
+function changeDetailImage(url, elem) {
+  const mainImg = document.getElementById('mainDetailImg');
+  if (mainImg) mainImg.src = url;
+  document.querySelectorAll('.gallery-thumb').forEach(el => el.classList.remove('active'));
   if (elem) elem.classList.add('active');
 }
 
-// Toggle favorite in details view
-function toggleDetailsFavorite(id) {
+// Toggle favorite from details page
+function toggleDetailFavorite(id) {
   const isAdded = FavoritesManager.toggle(id);
-  const btn = document.getElementById('detailsFavBtn');
-  const text = document.getElementById('detailsFavText');
+  const btn = document.getElementById('detailFavBtn');
+  const text = document.getElementById('detailFavText');
 
   if (isAdded) {
-    btn.className = 'btn btn-danger btn-sm rounded-pill px-3';
-    btn.innerHTML = '<i class="fas fa-heart me-1"></i> <span id="detailsFavText">In Favorites</span>';
-    showToast('Destination added to your saved favorites!', 'success');
+    btn.className = 'btn btn-sm btn-danger';
+    btn.innerHTML = '<i class="fas fa-heart me-1"></i> <span id="detailFavText">Saved in Favorites</span>';
+    showToast('Destination added to your favorites!', 'success');
   } else {
-    btn.className = 'btn btn-outline-danger btn-sm rounded-pill px-3';
-    btn.innerHTML = '<i class="far fa-heart me-1"></i> <span id="detailsFavText">Add to Favorites</span>';
-    showToast('Destination removed from favorites.', 'info');
+    btn.className = 'btn btn-sm btn-outline-danger';
+    btn.innerHTML = '<i class="far fa-heart me-1"></i> <span id="detailFavText">Add to Favorites</span>';
+    showToast('Removed from favorites.', 'info');
   }
 }
 
-window.changeMainImage = changeMainImage;
-window.toggleDetailsFavorite = toggleDetailsFavorite;
+window.changeDetailImage = changeDetailImage;
+window.toggleDetailFavorite = toggleDetailFavorite;

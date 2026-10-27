@@ -3,331 +3,235 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Travel Tips & Guidelines | Tourist Attraction Information Service Portal</title>
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <title>Travel Tips & Guidelines | Tourist Attraction Portal</title>
   <!-- Bootstrap 5 CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Font Awesome 6 Icons -->
+  <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <!-- Custom Styles -->
+  <!-- Simple Custom Styles -->
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-  <!-- Top Navigation Bar -->
-  <header>
-    <nav class="navbar navbar-expand-lg navbar-custom sticky-top">
-      <div class="container">
-        <a class="brand-logo" href="index.html">
-          <div class="brand-icon-wrapper">
-            <i class="fas fa-map-location-dot"></i>
-          </div>
-          <div>
-            <div class="brand-text-name">Tourist Attraction Portal</div>
-            <div class="brand-text-sub">Academic Tourism Service</div>
-          </div>
-        </a>
-
-        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
-          <i class="fas fa-bars text-dark fs-4"></i>
-        </button>
-
-        <div class="collapse navbar-collapse" id="mainNavbar">
-          <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center">
-            <li class="nav-item">
-              <a class="nav-link" href="index.html"><i class="fas fa-house me-1"></i> Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="destinations.html"><i class="fas fa-compass me-1"></i> Explore Destinations</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="favorites.html">
-                <i class="fas fa-heart me-1 text-danger"></i> Favorites
-                <span class="badge bg-danger badge-counter favorites-count-badge" style="display: none;">0</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link active" href="travel-tips.html"><i class="fas fa-lightbulb me-1"></i> Travel Tips</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="about.html"><i class="fas fa-circle-info me-1"></i> About Us</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="contact.html"><i class="fas fa-envelope me-1"></i> Contact</a>
-            </li>
-            <li class="nav-item ms-lg-2">
-              <a class="btn btn-outline-primary btn-sm rounded-pill px-3 fw-bold" href="admin.html">
-                <i class="fas fa-shield-halved me-1"></i> Admin
-              </a>
-            </li>
-          </ul>
-        </div>
+  <!-- College Top Bar -->
+  <div class="college-top-bar">
+    <div class="container d-flex justify-content-between align-items-center">
+      <div>
+        <i class="fas fa-graduation-cap me-1"></i> <strong>College Academic Project:</strong> Tourist Attraction Information Service Portal
       </div>
-    </nav>
-  </header>
+      <div class="d-none d-md-block">
+        Department of Computer Science & Engineering
+      </div>
+    </div>
+  </div>
 
-  <main class="py-5">
+  <!-- Navigation Bar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom sticky-top">
     <div class="container">
-      <!-- Breadcrumbs -->
-      <nav aria-label="breadcrumb" class="mb-4">
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item active" aria-current="page">Travel Tips</li>
-        </ol>
-      </nav>
+      <a class="navbar-brand d-flex align-items-center" href="index.html">
+        <div class="p-2 bg-primary text-white rounded me-2">
+          <i class="fas fa-map-marked-alt fa-lg"></i>
+        </div>
+        <div>
+          <span class="navbar-brand-title">Tourist Attraction Portal</span>
+          <span class="navbar-brand-sub">Tourism Information Service</span>
+        </div>
+      </a>
 
-      <!-- Page Header -->
-      <div class="text-center mb-5">
-        <span class="section-tag green"><i class="fas fa-compass me-1"></i> Smart Traveler Guide</span>
-        <h1 class="section-title">Essential Indian Travel Tips & Advice</h1>
-        <p class="section-subtitle">
-          Practical suggestions on planning, safety, packing, responsible tourism, and navigating local transportation across Indian destinations.
-        </p>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html"><i class="fas fa-home me-1"></i> Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="destinations.html"><i class="fas fa-compass me-1"></i> Explore Destinations</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="favorites.html">
+              <i class="fas fa-heart text-danger me-1"></i> Favorites
+              <span class="badge bg-danger favorites-count-badge" style="display: none;">0</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="travel-tips.html"><i class="fas fa-lightbulb me-1"></i> Travel Tips</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="about.html"><i class="fas fa-info-circle me-1"></i> About Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="contact.html"><i class="fas fa-envelope me-1"></i> Contact Us</a>
+          </li>
+          <li class="nav-item ms-lg-2">
+            <a class="btn btn-sm btn-outline-primary" href="admin.html">
+              <i class="fas fa-user-lock me-1"></i> Admin
+            </a>
+          </li>
+        </ul>
       </div>
+    </div>
+  </nav>
 
-      <!-- Verification Notice Alert -->
-      <div class="alert alert-warning border-start border-4 border-warning shadow-sm rounded-3 mb-5 p-4">
-        <div class="d-flex align-items-start gap-3">
-          <i class="fas fa-triangle-exclamation fa-2x text-warning mt-1"></i>
+  <!-- Page Header -->
+  <div class="bg-light py-4 border-bottom">
+    <div class="container text-center">
+      <h1 class="h3 fw-bold text-dark mb-1">Tourist Travel Tips & Guidelines</h1>
+      <p class="text-muted mb-0 small">Practical advice on trip planning, packing, safety, transportation, and responsible travel.</p>
+    </div>
+  </div>
+
+  <main class="py-4">
+    <div class="container">
+
+      <!-- Official Schedule Verification Alert -->
+      <div class="alert alert-warning border-start border-4 border-warning shadow-sm mb-4">
+        <div class="d-flex align-items-center">
+          <i class="fas fa-exclamation-triangle fa-2x text-warning me-3"></i>
           <div>
-            <h5 class="fw-bold mb-1">Crucial Traveler Advice: Verify Official Schedules</h5>
+            <h5 class="fw-bold mb-1">Important Notice: Verify Official Travel Information</h5>
             <p class="mb-0 small text-dark">
-              Archaeological monuments (ASI), temples, wildlife sanctuaries, and dam viewpoints frequently change their visiting hours, ticket prices, and entry requirements during national holidays, religious festivals, and weather maintenance. <strong>Always confirm official notifications with relevant government tourism departments or ticket booking portals before commencing your journey.</strong>
+              Visiting hours, admission fees, and photography guidelines at historical monuments and temples may change on public holidays, festive occasions, or due to renovation. Always check official state tourism portals (e.g. Telangana Tourism, ASI India) before starting your trip.
             </p>
           </div>
         </div>
       </div>
 
-      <!-- Organized Travel Tips Sections -->
-      <div class="row g-4 mb-5">
-        <!-- 1. Travel Planning -->
-        <div class="col-lg-6">
-          <div class="p-4 bg-white rounded-4 border shadow-sm h-100">
-            <div class="d-flex align-items-center gap-3 mb-3">
-              <div class="stat-icon" style="width: 50px; height: 50px;">
-                <i class="fas fa-calendar-check"></i>
-              </div>
-              <h2 class="h4 fw-bold text-dark mb-0">1. Trip Planning & Timings</h2>
-            </div>
-            <ul class="list-unstyled text-muted mb-0" style="line-height: 1.7;">
-              <li class="mb-2 d-flex align-items-start gap-2">
-                <i class="fas fa-check text-primary mt-1"></i>
-                <span><strong>Seasonal Planning:</strong> For most parts of India, including Telangana, Rajasthan, and Uttar Pradesh, October to March provides the most pleasant climate.</span>
-              </li>
-              <li class="mb-2 d-flex align-items-start gap-2">
-                <i class="fas fa-check text-primary mt-1"></i>
-                <span><strong>Monsoon Splendor:</strong> Waterfalls like Bogatha and reservoirs like Nagarjuna Sagar are best viewed between July and October when inflows peak.</span>
-              </li>
-              <li class="mb-2 d-flex align-items-start gap-2">
-                <i class="fas fa-check text-primary mt-1"></i>
-                <span><strong>Early Morning Starts:</strong> Prominent landmarks like Charminar, Taj Mahal, and Golconda Fort are cooler and significantly less crowded before 10:00 AM.</span>
-              </li>
-              <li class="d-flex align-items-start gap-2">
-                <i class="fas fa-check text-primary mt-1"></i>
-                <span><strong>Advance Online Bookings:</strong> Secure tickets for Tirumala darshan, Vistadome trains, and ASI monuments online to bypass extensive ticket lines.</span>
-              </li>
+      <!-- Tips Cards Grid -->
+      <div class="row g-4">
+        <!-- 1. Planning Tips -->
+        <div class="col-md-6">
+          <div class="bg-white p-4 border rounded shadow-sm h-100">
+            <h4 class="h5 fw-bold text-primary mb-3">
+              <i class="fas fa-calendar-check me-2"></i>1. Travel Planning Tips
+            </h4>
+            <ul class="text-muted small ps-3 mb-0" style="line-height: 1.8;">
+              <li><strong>Best Season:</strong> October to March is the ideal time to visit most destinations in Telangana, Rajasthan, Delhi, and Maharashtra due to pleasant weather.</li>
+              <li><strong>Monsoon Beauty:</strong> Waterfalls like Bogatha and reservoirs like Nagarjuna Sagar are best viewed between July and October.</li>
+              <li><strong>Beat the Crowds:</strong> Start early in the morning (around 8:00 AM – 9:00 AM) to experience popular sights like Charminar and Golconda Fort with fewer crowds.</li>
+              <li><strong>Book in Advance:</strong> Book tickets for major pilgrimage sites like Tirumala or heritage toy trains in Ooty well in advance.</li>
             </ul>
           </div>
         </div>
 
-        <!-- 2. Packing Essentials -->
-        <div class="col-lg-6">
-          <div class="p-4 bg-white rounded-4 border shadow-sm h-100">
-            <div class="d-flex align-items-center gap-3 mb-3">
-              <div class="stat-icon green" style="width: 50px; height: 50px;">
-                <i class="fas fa-suitcase-rolling"></i>
-              </div>
-              <h2 class="h4 fw-bold text-dark mb-0">2. Packing Suggestions</h2>
-            </div>
-            <ul class="list-unstyled text-muted mb-0" style="line-height: 1.7;">
-              <li class="mb-2 d-flex align-items-start gap-2">
-                <i class="fas fa-check text-success mt-1"></i>
-                <span><strong>Modest Clothing:</strong> Carry breathable cotton clothes suitable for tropical heat. When visiting religious shrines (e.g. Tirumala, Thousand Pillar), follow dress codes.</span>
-              </li>
-              <li class="mb-2 d-flex align-items-start gap-2">
-                <i class="fas fa-check text-success mt-1"></i>
-                <span><strong>Sturdy Walking Footwear:</strong> Forts such as Golconda involve stone staircases and uneven masonry—wear cushioned, slip-resistant shoes.</span>
-              </li>
-              <li class="mb-2 d-flex align-items-start gap-2">
-                <i class="fas fa-check text-success mt-1"></i>
-                <span><strong>Sun & Hydration Gear:</strong> UV-protective sunglasses, wide-brimmed hats, high-SPF sunscreen, and a reusable water bottle.</span>
-              </li>
-              <li class="d-flex align-items-start gap-2">
-                <i class="fas fa-check text-success mt-1"></i>
-                <span><strong>First Aid & Essentials:</strong> Keep oral rehydration salts (ORS), personal medicines, hand sanitizers, power banks, and photocopy IDs.</span>
-              </li>
+        <!-- 2. Packing Suggestions -->
+        <div class="col-md-6">
+          <div class="bg-white p-4 border rounded shadow-sm h-100">
+            <h4 class="h5 fw-bold text-success mb-3">
+              <i class="fas fa-suitcase me-2"></i>2. Packing Suggestions
+            </h4>
+            <ul class="text-muted small ps-3 mb-0" style="line-height: 1.8;">
+              <li><strong>Footwear:</strong> Wear comfortable, slip-resistant walking shoes or sneakers. Forts like Golconda require climbing several stone stairs.</li>
+              <li><strong>Dress Codes:</strong> Carry modest clothing. Many temples (e.g. Tirumala, Thousand Pillar Temple) enforce traditional dress guidelines (dhoti/kurta for men, saree/chudidar for women).</li>
+              <li><strong>Sun Protection:</strong> Carry a hat, sunglasses, sunscreen, and an umbrella, especially during day tours.</li>
+              <li><strong>Hydration & Power:</strong> Always keep a refillable water bottle and a mobile power bank handy.</li>
             </ul>
           </div>
         </div>
 
         <!-- 3. Local Transportation -->
-        <div class="col-lg-6">
-          <div class="p-4 bg-white rounded-4 border shadow-sm h-100">
-            <div class="d-flex align-items-center gap-3 mb-3">
-              <div class="stat-icon accent" style="width: 50px; height: 50px;">
-                <i class="fas fa-train-subway"></i>
-              </div>
-              <h2 class="h4 fw-bold text-dark mb-0">3. Local Transportation Advice</h2>
-            </div>
-            <ul class="list-unstyled text-muted mb-0" style="line-height: 1.7;">
-              <li class="mb-2 d-flex align-items-start gap-2">
-                <i class="fas fa-check text-warning mt-1"></i>
-                <span><strong>Metropolitan Rail:</strong> In Hyderabad (Hyderabad Metro) and Delhi (Delhi Metro), transit networks connect major heritage hubs quickly and affordably.</span>
-              </li>
-              <li class="mb-2 d-flex align-items-start gap-2">
-                <i class="fas fa-check text-warning mt-1"></i>
-                <span><strong>App-Based Cabs & Autos:</strong> Use registered rideshare apps (Ola, Uber, Rapido) or prepaid taxi stands at airports and railway junctions.</span>
-              </li>
-              <li class="mb-2 d-flex align-items-start gap-2">
-                <i class="fas fa-check text-warning mt-1"></i>
-                <span><strong>State RTC Buses:</strong> TGSRTC (Telangana) and APSRTC (Andhra Pradesh) operate air-conditioned express buses directly connecting historical districts.</span>
-              </li>
-              <li class="d-flex align-items-start gap-2">
-                <i class="fas fa-check text-warning mt-1"></i>
-                <span><strong>Scenic Rail Experiences:</strong> Consider scenic rail journeys like the Nilgiri Mountain Toy Train to Ooty or the Araku Valley Vistadome train.</span>
-              </li>
+        <div class="col-md-6">
+          <div class="bg-white p-4 border rounded shadow-sm h-100">
+            <h4 class="h5 fw-bold text-warning mb-3">
+              <i class="fas fa-bus me-2"></i>3. Local Transportation Guidance
+            </h4>
+            <ul class="text-muted small ps-3 mb-0" style="line-height: 1.8;">
+              <li><strong>Metro Rail:</strong> Use Hyderabad Metro or Delhi Metro to bypass road congestion quickly and affordably.</li>
+              <li><strong>State RTC Buses:</strong> TGSRTC buses in Telangana connect Hyderabad directly to Warangal, Nagarjuna Sagar, and district heritage centers.</li>
+              <li><strong>App-Based Cabs & Autos:</strong> Use registered rideshare apps (Ola, Uber, Rapido) or prepaid taxi counters at railway stations and airports.</li>
+              <li><strong>Scenic Rail Routes:</strong> The Vistadome train coach from Visakhapatnam to Araku Valley offers spectacular mountain tunnel views.</li>
             </ul>
           </div>
         </div>
 
-        <!-- 4. Safety & Health Guidelines -->
-        <div class="col-lg-6">
-          <div class="p-4 bg-white rounded-4 border shadow-sm h-100">
-            <div class="d-flex align-items-center gap-3 mb-3">
-              <div class="stat-icon" style="width: 50px; height: 50px; background: #fee2e2; color: #ef4444;">
-                <i class="fas fa-shield-halved"></i>
-              </div>
-              <h2 class="h4 fw-bold text-dark mb-0">4. Safety & Emergency Protocols</h2>
-            </div>
-            <ul class="list-unstyled text-muted mb-0" style="line-height: 1.7;">
-              <li class="mb-2 d-flex align-items-start gap-2">
-                <i class="fas fa-check text-danger mt-1"></i>
-                <span><strong>Emergency Numbers:</strong> National Emergency Number: <strong>112</strong>; Police: <strong>100</strong>; Ambulance: <strong>108</strong>; Tourist Helpline: <strong>1363</strong>.</span>
-              </li>
-              <li class="mb-2 d-flex align-items-start gap-2">
-                <i class="fas fa-check text-danger mt-1"></i>
-                <span><strong>Safe Drinking Water:</strong> Only drink packaged purified water or filtered water from verified food-safety dispensers. Avoid untreated tap water.</span>
-              </li>
-              <li class="mb-2 d-flex align-items-start gap-2">
-                <i class="fas fa-check text-danger mt-1"></i>
-                <span><strong>Water Safety:</strong> In natural waterfalls (like Bogatha) or sea beaches (like Calangute), heed red warning flags and never swim in unmonitored zones.</span>
-              </li>
-              <li class="d-flex align-items-start gap-2">
-                <i class="fas fa-check text-danger mt-1"></i>
-                <span><strong>Authorized Guides:</strong> Always verify that heritage guides wear their official Ministry of Tourism or ASI photo identity badges.</span>
-              </li>
+        <!-- 4. Safety Guidelines -->
+        <div class="col-md-6">
+          <div class="bg-white p-4 border rounded shadow-sm h-100">
+            <h4 class="h5 fw-bold text-danger mb-3">
+              <i class="fas fa-shield-alt me-2"></i>4. Safety Guidelines & Helplines
+            </h4>
+            <ul class="text-muted small ps-3 mb-0" style="line-height: 1.8;">
+              <li><strong>Emergency Contact Numbers:</strong> National Emergency: <strong>112</strong> | Police: <strong>100</strong> | Ambulance: <strong>108</strong> | Tourist Helpline: <strong>1363</strong>.</li>
+              <li><strong>Drinking Water:</strong> Prefer sealed packaged water or filtered water dispensers. Avoid untreated tap water.</li>
+              <li><strong>Water Safety:</strong> Never swim in unauthorized areas near waterfalls (like Bogatha) or dangerous beach currents. Look for lifeguard flags.</li>
+              <li><strong>Authorized Guides:</strong> Request government-certified ID badges when hiring local tourist guides.</li>
             </ul>
           </div>
         </div>
 
         <!-- 5. Responsible Tourism & Environmental Protection -->
         <div class="col-12">
-          <div class="p-4 p-md-5 bg-white rounded-4 border shadow-sm">
-            <div class="d-flex align-items-center gap-3 mb-3">
-              <div class="stat-icon green" style="width: 50px; height: 50px;">
-                <i class="fas fa-seedling"></i>
-              </div>
-              <h2 class="h4 fw-bold text-dark mb-0">5. Responsible & Sustainable Tourism</h2>
-            </div>
-            <div class="row g-4 pt-2">
+          <div class="bg-white p-4 border rounded shadow-sm">
+            <h4 class="h5 fw-bold text-dark mb-3">
+              <i class="fas fa-leaf text-success me-2"></i>5. Responsible Tourism & Environmental Protection
+            </h4>
+            <div class="row g-3 text-muted small">
               <div class="col-md-4">
-                <h3 class="h6 fw-bold text-dark"><i class="fas fa-ban text-danger me-1"></i> Zero Plastic Waste</h3>
-                <p class="small text-muted mb-0">
-                  Avoid single-use plastic bottles and polythene bags, particularly in wildlife sanctuaries and eco-sensitive hill stations like Araku and Ooty. Carry your garbage until a designated disposal bin is reached.
-                </p>
+                <strong><i class="fas fa-ban text-danger me-1"></i> Avoid Single-Use Plastics:</strong>
+                <p class="mb-0 mt-1">Please do not litter plastic wrappers, bottles, or cups at heritage monuments, hill stations (Ooty, Araku), and wildlife sanctuaries.</p>
               </div>
               <div class="col-md-4">
-                <h3 class="h6 fw-bold text-dark"><i class="fas fa-monument text-primary me-1"></i> Preserve Heritage</h3>
-                <p class="small text-muted mb-0">
-                  Never deface ancient stone walls, temple sculptures, or fort battlements. Photography rules must be honored, especially in inner sanctums and active religious shrines.
-                </p>
+                <strong><i class="fas fa-monument text-primary me-1"></i> Respect Heritage Structures:</strong>
+                <p class="mb-0 mt-1">Do not write names or scratch walls on historical monuments. Help preserve our ancient heritage for future generations.</p>
               </div>
               <div class="col-md-4">
-                <h3 class="h6 fw-bold text-dark"><i class="fas fa-hand-holding-dollar text-success me-1"></i> Support Local Economies</h3>
-                <p class="small text-muted mb-0">
-                  Patronize local artisans, tribal handicrafts (such as Dhokra metal crafts or Pochampally weaves in Telangana), and locally owned culinary establishments to support host communities.
-                </p>
+                <strong><i class="fas fa-shopping-bag text-success me-1"></i> Support Local Artisans:</strong>
+                <p class="mb-0 mt-1">Buy traditional handicrafts and handlooms (such as Pochampally sarees, brassware, and local spices) to directly assist local communities.</p>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Bottom CTA Banner -->
-      <div class="text-center p-4 bg-light rounded-4 border">
-        <h3 class="h5 fw-bold text-dark mb-2">Have a Question or Need Recommendations?</h3>
-        <p class="text-muted small mb-3">Our portal provides verified destination intelligence to ensure your vacation is seamless.</p>
-        <a href="destinations.html" class="btn btn-primary rounded-pill px-4 fw-bold me-2">
-          <i class="fas fa-compass me-2"></i>Explore Destinations
-        </a>
-        <a href="contact.html" class="btn btn-outline-secondary rounded-pill px-4 fw-bold">
-          <i class="fas fa-envelope me-2"></i>Contact Us
+      <!-- Action Box -->
+      <div class="text-center bg-white p-4 border rounded mt-4">
+        <h5 class="fw-bold mb-2">Ready to explore tourist attractions?</h5>
+        <p class="text-muted small mb-3">Check out all 19 sample destinations with verified details, facilities, and Google Maps locations.</p>
+        <a href="destinations.html" class="btn btn-primary px-4 fw-bold">
+          <i class="fas fa-compass me-1"></i> Browse Destinations
         </a>
       </div>
 
     </div>
   </main>
 
-  <!-- Global Footer -->
-  <footer class="footer-main">
+  <!-- Footer -->
+  <footer>
     <div class="container">
       <div class="row g-4">
-        <div class="col-lg-4 col-md-6">
-          <div class="d-flex align-items-center gap-2 mb-3">
-            <div class="brand-icon-wrapper" style="width: 38px; height: 38px; font-size: 1rem;">
-              <i class="fas fa-map-location-dot"></i>
-            </div>
-            <span class="footer-brand-title mb-0">Tourist Attraction Portal</span>
-          </div>
-          <p class="small text-muted mb-3">
-            Your trusted travel companion for exploring Incredible India responsibly and safely.
+        <div class="col-md-4">
+          <h5>Tourist Attraction Portal</h5>
+          <p class="small text-light" style="opacity: 0.85;">
+            College academic project built using Express.js and SQLite to deliver a simple, responsive tourism guide.
           </p>
         </div>
-
-        <div class="col-lg-2 col-md-6 col-6">
-          <h5 class="footer-heading">Quick Links</h5>
-          <ul class="footer-links">
+        <div class="col-md-4">
+          <h5>Quick Links</h5>
+          <ul class="list-unstyled">
             <li><a href="index.html">Home</a></li>
-            <li><a href="destinations.html">All Destinations</a></li>
+            <li><a href="destinations.html">Explore Destinations</a></li>
             <li><a href="favorites.html">Saved Favorites</a></li>
             <li><a href="travel-tips.html">Travel Tips</a></li>
-            <li><a href="about.html">About Project</a></li>
-            <li><a href="contact.html">Contact Us</a></li>
           </ul>
         </div>
-
-        <div class="col-lg-3 col-md-6 col-6">
-          <h5 class="footer-heading">Categories</h5>
-          <ul class="footer-links">
-            <li><a href="destinations.html?category=Historical%20Monuments">Historical Monuments</a></li>
-            <li><a href="destinations.html?category=Temples%20and%20Religious%20Places">Temples & Religious</a></li>
-            <li><a href="destinations.html?category=Hill%20Stations">Hill Stations</a></li>
-            <li><a href="destinations.html?category=Beaches">Beaches & Coastal</a></li>
-          </ul>
-        </div>
-
-        <div class="col-lg-3 col-md-6">
-          <h5 class="footer-heading">Academic Portal</h5>
-          <p class="small text-muted mb-0">
-            Node.js, Express, SQLite, and vanilla ES6 frontend.
+        <div class="col-md-4">
+          <h5>Academic Evaluation</h5>
+          <p class="small text-light" style="opacity: 0.85;">
+            Developed for college project submission. Fully working backend REST API and persistent SQLite database.
           </p>
         </div>
       </div>
-
-      <div class="footer-bottom text-center">
-        <p class="mb-0 text-muted small">
-          &copy; 2026 Tourist Attraction Information Service Portal. All rights reserved. Academic Demonstration.
-        </p>
+      <div class="footer-bottom">
+        <p class="mb-0">&copy; 2026 Tourist Attraction Information Service Portal.</p>
       </div>
     </div>
   </footer>
 
-  <!-- Bootstrap JS Bundle -->
+  <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <!-- API Service & Global Scripts -->
+  <!-- API & Global JS -->
   <script src="js/api.js"></script>
   <script src="js/app.js"></script>
 </body>

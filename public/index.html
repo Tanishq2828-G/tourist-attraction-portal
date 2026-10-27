@@ -3,399 +3,317 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tourist Attraction Information Service Portal | Discover Incredible Destinations</title>
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <title>Tourist Attraction Information Service Portal | College Academic Project</title>
   <!-- Bootstrap 5 CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Font Awesome 6 Icons -->
+  <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <!-- Custom Styles -->
+  <!-- Simple Custom Styles -->
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-  <!-- Top Navigation Bar -->
-  <header>
-    <nav class="navbar navbar-expand-lg navbar-custom sticky-top">
-      <div class="container">
-        <a class="brand-logo" href="index.html">
-          <div class="brand-icon-wrapper">
-            <i class="fas fa-map-location-dot"></i>
-          </div>
-          <div>
-            <div class="brand-text-name">Tourist Attraction Portal</div>
-            <div class="brand-text-sub">Academic Tourism Service</div>
-          </div>
-        </a>
-
-        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
-          <i class="fas fa-bars text-dark fs-4"></i>
-        </button>
-
-        <div class="collapse navbar-collapse" id="mainNavbar">
-          <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center">
-            <li class="nav-item">
-              <a class="nav-link active" href="index.html"><i class="fas fa-house me-1"></i> Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="destinations.html"><i class="fas fa-compass me-1"></i> Explore Destinations</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="favorites.html">
-                <i class="fas fa-heart me-1 text-danger"></i> Favorites
-                <span class="badge bg-danger badge-counter favorites-count-badge" style="display: none;">0</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="travel-tips.html"><i class="fas fa-lightbulb me-1"></i> Travel Tips</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="about.html"><i class="fas fa-circle-info me-1"></i> About Us</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="contact.html"><i class="fas fa-envelope me-1"></i> Contact</a>
-            </li>
-            <li class="nav-item ms-lg-2">
-              <a class="btn btn-outline-primary btn-sm rounded-pill px-3 fw-bold" href="admin.html">
-                <i class="fas fa-shield-halved me-1"></i> Admin
-              </a>
-            </li>
-          </ul>
-        </div>
+  <!-- College Top Bar -->
+  <div class="college-top-bar">
+    <div class="container d-flex justify-content-between align-items-center">
+      <div>
+        <i class="fas fa-graduation-cap me-1"></i> <strong>College Academic Project:</strong> Tourist Attraction Information Service Portal
       </div>
-    </nav>
-  </header>
-
-  <main>
-    <!-- Hero Section -->
-    <section class="hero-section text-center">
-      <div class="container hero-content">
-        <div class="hero-pill">
-          <i class="fas fa-sparkles text-warning"></i> Explore Iconic Telangana & Indian Heritage
-        </div>
-        <h1 class="hero-title">
-          Discover <span class="highlight">Amazing Destinations</span> Across India
-        </h1>
-        <p class="hero-subtitle">
-          Your comprehensive digital guide to historical monuments, ancient temples, misty hill stations, sunlit beaches, and natural wonders. Plan your trip with verified travel insights.
-        </p>
-
-        <!-- Search Bar -->
-        <form id="heroSearchForm" class="hero-search-wrapper" action="destinations.html" method="GET">
-          <i class="fas fa-magnifying-glass search-icon"></i>
-          <input 
-            type="text" 
-            name="search" 
-            id="heroSearchInput" 
-            placeholder="Search attractions, cities, or states (e.g. Charminar, Golconda, Goa)..." 
-            aria-label="Destination search query"
-            required
-          >
-          <button type="submit" class="hero-search-btn">
-            <i class="fas fa-search"></i> Search
-          </button>
-        </form>
-
-        <div class="hero-quick-tags">
-          <span class="fw-semibold">Popular Searches:</span>
-          <a href="destinations.html?search=Charminar">Charminar</a>
-          <a href="destinations.html?search=Golconda">Golconda Fort</a>
-          <a href="destinations.html?search=Ramappa">Ramappa Temple</a>
-          <a href="destinations.html?category=Historical%20Monuments">Monuments</a>
-          <a href="destinations.html?state=Telangana">Telangana</a>
-        </div>
-
-        <div class="mt-4">
-          <a href="destinations.html" class="btn btn-light btn-lg rounded-pill px-4 fw-bold me-2 text-primary shadow-sm">
-            <i class="fas fa-compass me-2"></i>Explore All Destinations
-          </a>
-          <a href="travel-tips.html" class="btn btn-outline-light btn-lg rounded-pill px-4 fw-bold">
-            <i class="fas fa-book-open me-2"></i>Trip Planning Guide
-          </a>
-        </div>
+      <div class="d-none d-md-block">
+        Department of Computer Science & Engineering | Academic Year 2026
       </div>
-    </section>
+    </div>
+  </div>
 
-    <!-- Stats Banner -->
+  <!-- Navigation Bar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom sticky-top">
     <div class="container">
-      <div class="stats-banner">
-        <div class="row g-3 text-center text-md-start">
-          <div class="col-md-3 col-6">
-            <div class="stat-item">
-              <div class="stat-icon">
-                <i class="fas fa-landmark"></i>
-              </div>
-              <div>
-                <div class="stat-value" id="statDestCount">19+</div>
-                <div class="stat-label">Destinations</div>
-              </div>
-            </div>
+      <a class="navbar-brand d-flex align-items-center" href="index.html">
+        <div class="p-2 bg-primary text-white rounded me-2">
+          <i class="fas fa-map-marked-alt fa-lg"></i>
+        </div>
+        <div>
+          <span class="navbar-brand-title">Tourist Attraction Portal</span>
+          <span class="navbar-brand-sub">Tourism Information Service</span>
+        </div>
+      </a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center">
+          <li class="nav-item">
+            <a class="nav-link active" href="index.html"><i class="fas fa-home me-1"></i> Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="destinations.html"><i class="fas fa-compass me-1"></i> Explore Destinations</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="favorites.html">
+              <i class="fas fa-heart text-danger me-1"></i> Favorites
+              <span class="badge bg-danger favorites-count-badge" style="display: none;">0</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="travel-tips.html"><i class="fas fa-lightbulb me-1"></i> Travel Tips</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="about.html"><i class="fas fa-info-circle me-1"></i> About Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="contact.html"><i class="fas fa-envelope me-1"></i> Contact Us</a>
+          </li>
+          <li class="nav-item ms-lg-2">
+            <a class="btn btn-sm btn-outline-primary" href="admin.html">
+              <i class="fas fa-user-lock me-1"></i> Admin
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero-box">
+    <div class="container">
+      <span class="badge bg-success mb-2 px-3 py-2 text-uppercase fw-bold">Explore Incredible India</span>
+      <h1>Discover Amazing Destinations</h1>
+      <p>
+        Welcome to the Tourist Attraction Information Service Portal. Explore famous tourist places in Telangana and throughout India, check entry fees, visiting hours, available facilities, and plan your journey easily.
+      </p>
+
+      <!-- Destination Search Bar -->
+      <form class="hero-search-form" action="destinations.html" method="GET">
+        <input 
+          type="text" 
+          name="search" 
+          placeholder="Search attractions by name, city, or state (e.g. Charminar, Golconda, Goa)..." 
+          required
+        >
+        <button type="submit">
+          <i class="fas fa-search me-1"></i> Search
+        </button>
+      </form>
+
+      <div class="mt-3">
+        <a href="destinations.html" class="btn btn-light btn-lg fw-bold me-2 text-primary shadow-sm">
+          <i class="fas fa-compass me-1"></i> Explore Destinations
+        </a>
+        <a href="travel-tips.html" class="btn btn-outline-light btn-lg fw-bold">
+          <i class="fas fa-list me-1"></i> Travel Tips
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick Statistics Banner -->
+  <div class="container my-4">
+    <div class="row g-3 text-center">
+      <div class="col-md-3 col-6">
+        <div class="bg-white p-3 border rounded shadow-sm">
+          <div class="h3 fw-bold text-primary mb-0" id="statDest">19+</div>
+          <div class="small text-muted fw-bold">Sample Attractions</div>
+        </div>
+      </div>
+      <div class="col-md-3 col-6">
+        <div class="bg-white p-3 border rounded shadow-sm">
+          <div class="h3 fw-bold text-success mb-0" id="statCat">9</div>
+          <div class="small text-muted fw-bold">Diverse Categories</div>
+        </div>
+      </div>
+      <div class="col-md-3 col-6">
+        <div class="bg-white p-3 border rounded shadow-sm">
+          <div class="h3 fw-bold text-warning mb-0" id="statStates">10+</div>
+          <div class="small text-muted fw-bold">States Covered</div>
+        </div>
+      </div>
+      <div class="col-md-3 col-6">
+        <div class="bg-white p-3 border rounded shadow-sm">
+          <div class="h3 fw-bold text-info mb-0">SQLite</div>
+          <div class="small text-muted fw-bold">Persistent Storage</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Popular Tourist Destinations Section (At least 8 cards) -->
+  <section class="py-4">
+    <div class="container">
+      <div class="section-header">
+        <h2>Popular Tourist Destinations</h2>
+        <p>Explore some of the most famous tourist attractions from Telangana and other regions of India.</p>
+      </div>
+
+      <div class="row" id="featuredDestinationsRow">
+        <div class="col-12 text-center py-4">
+          <div class="spinner-border text-primary" role="status"></div>
+          <p class="text-muted mt-2">Loading sample attractions from SQLite database...</p>
+        </div>
+      </div>
+
+      <div class="text-center mt-3 mb-4">
+        <a href="destinations.html" class="btn btn-primary btn-lg px-4">
+          View All Destinations <i class="fas fa-arrow-right ms-1"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Popular Travel Categories Section -->
+  <section class="py-5 bg-white border-top border-bottom">
+    <div class="container">
+      <div class="section-header">
+        <h2>Popular Travel Categories</h2>
+        <p>Find destinations according to your favorite travel theme.</p>
+      </div>
+
+      <div class="row g-3" id="categoriesContainer">
+        <!-- Dynamically injected via script -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Choose Us Section -->
+  <section class="py-5">
+    <div class="container">
+      <div class="section-header">
+        <h2>Why Choose Us</h2>
+        <p>Our portal makes travel planning simple and reliable for college students and tourists.</p>
+      </div>
+
+      <div class="row g-4 text-center">
+        <div class="col-md-3 col-sm-6">
+          <div class="bg-white p-4 border rounded h-100 shadow-sm">
+            <div class="mb-3 text-primary"><i class="fas fa-info-circle fa-2x"></i></div>
+            <h5 class="fw-bold">Detailed Information</h5>
+            <p class="small text-muted mb-0">Check entry fees, timings, address, and facility details before planning a visit.</p>
           </div>
-          <div class="col-md-3 col-6">
-            <div class="stat-item">
-              <div class="stat-icon green">
-                <i class="fas fa-layer-group"></i>
-              </div>
-              <div>
-                <div class="stat-value" id="statCatCount">9</div>
-                <div class="stat-label">Travel Categories</div>
-              </div>
-            </div>
+        </div>
+        <div class="col-md-3 col-sm-6">
+          <div class="bg-white p-4 border rounded h-100 shadow-sm">
+            <div class="mb-3 text-success"><i class="fas fa-filter fa-2x"></i></div>
+            <h5 class="fw-bold">Easy Searching & Filtering</h5>
+            <p class="small text-muted mb-0">Quickly filter destinations by state or travel category, and search by keywords.</p>
           </div>
-          <div class="col-md-3 col-6">
-            <div class="stat-item">
-              <div class="stat-icon accent">
-                <i class="fas fa-map"></i>
-              </div>
-              <div>
-                <div class="stat-value" id="statStatesCount">10+</div>
-                <div class="stat-label">States Covered</div>
-              </div>
-            </div>
+        </div>
+        <div class="col-md-3 col-sm-6">
+          <div class="bg-white p-4 border rounded h-100 shadow-sm">
+            <div class="mb-3 text-danger"><i class="fas fa-heart fa-2x"></i></div>
+            <h5 class="fw-bold">Save Favorites</h5>
+            <p class="small text-muted mb-0">Bookmark your favorite places directly in your browser without needing to register.</p>
           </div>
-          <div class="col-md-3 col-6">
-            <div class="stat-item">
-              <div class="stat-icon green">
-                <i class="fas fa-shield-heart"></i>
-              </div>
-              <div>
-                <div class="stat-value">100%</div>
-                <div class="stat-label">Verified Guidance</div>
-              </div>
-            </div>
+        </div>
+        <div class="col-md-3 col-sm-6">
+          <div class="bg-white p-4 border rounded h-100 shadow-sm">
+            <div class="mb-3 text-warning"><i class="fas fa-map-location-dot fa-2x"></i></div>
+            <h5 class="fw-bold">Interactive Google Maps</h5>
+            <p class="small text-muted mb-0">View destination coordinates and get instant navigation routes on Google Maps.</p>
           </div>
         </div>
       </div>
     </div>
+  </section>
 
-    <!-- Featured Tourist Attractions Section -->
-    <section class="py-5 mt-4">
-      <div class="container">
-        <div class="text-center mb-5">
-          <span class="section-tag"><i class="fas fa-fire me-1"></i> Must-Visit Wonders</span>
-          <h2 class="section-title">Popular Tourist Destinations</h2>
-          <p class="section-subtitle">
-            Explore curated highlights from Telangana’s historic forts to India’s most celebrated cultural icons.
-          </p>
-        </div>
+  <!-- Travel Inspiration Section -->
+  <section class="py-5 text-white" style="background-color: #0b2545;">
+    <div class="container text-center">
+      <h2 class="fw-bold mb-3">Travel Inspiration: Discover Telangana & Beyond</h2>
+      <p class="lead mb-4 mx-auto text-light" style="max-width: 700px; opacity: 0.9;">
+        From the historic Charminar in Hyderabad and the 800-year-old floating bricks of Ramappa Temple, to the beaches of Goa and hill stations of Ooty, start planning your memorable journey today.
+      </p>
+      <a href="destinations.html" class="btn btn-success btn-lg px-4 fw-bold me-2">
+        <i class="fas fa-compass me-1"></i> Browse All Places
+      </a>
+      <a href="contact.html" class="btn btn-outline-light btn-lg px-4 fw-bold">
+        <i class="fas fa-envelope me-1"></i> Contact Us
+      </a>
+    </div>
+  </section>
 
-        <!-- Featured Destinations Grid (Loaded dynamically from API) -->
-        <div class="row" id="featuredGrid">
-          <!-- Populated by index script -->
-          <div class="col-12 text-center py-5">
-            <div class="spinner-border text-primary" role="status">
-              <span class="visually-hidden">Loading destinations...</span>
-            </div>
-            <p class="mt-2 text-muted fw-semibold">Loading top destinations from backend...</p>
-          </div>
-        </div>
-
-        <div class="text-center mt-4">
-          <a href="destinations.html" class="btn btn-primary btn-lg rounded-pill px-5 fw-bold shadow-sm">
-            View All Destinations <i class="fas fa-arrow-right ms-2"></i>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- Popular Travel Categories Section -->
-    <section class="py-5 bg-white border-top border-bottom">
-      <div class="container">
-        <div class="text-center mb-5">
-          <span class="section-tag green"><i class="fas fa-th-large me-1"></i> Browse by Interest</span>
-          <h2 class="section-title">Popular Travel Categories</h2>
-          <p class="section-subtitle">
-            Find the journey that matches your style—from spiritual sanctuaries to pristine natural retreats.
-          </p>
-        </div>
-
-        <div class="row g-4" id="categoriesRow">
-          <!-- Dynamic category cards -->
-        </div>
-      </div>
-    </section>
-
-    <!-- Why Choose Us / Portal Features Section -->
-    <section class="py-5">
-      <div class="container">
-        <div class="text-center mb-5">
-          <span class="section-tag"><i class="fas fa-star me-1"></i> Portal Highlights</span>
-          <h2 class="section-title">Why Use Our Tourism Service Portal?</h2>
-          <p class="section-subtitle">
-            Engineered with modern web standards and reliable database architecture to simplify tourist exploration.
-          </p>
-        </div>
-
-        <div class="row g-4">
-          <div class="col-lg-3 col-md-6">
-            <div class="feature-card">
-              <div class="feature-icon-box">
-                <i class="fas fa-database"></i>
-              </div>
-              <h4 class="fw-bold fs-5 mb-2">Persistent Data Store</h4>
-              <p class="text-muted small mb-0">
-                Backed by SQLite database with structured schemas for attractions, timings, facilities, and contact inquiries.
-              </p>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-6">
-            <div class="feature-card">
-              <div class="feature-icon-box">
-                <i class="fas fa-filter"></i>
-              </div>
-              <h4 class="fw-bold fs-5 mb-2">Multi-Filter Engine</h4>
-              <p class="text-muted small mb-0">
-                Filter instantaneously by state, category, and keyword search parameters with SQL-powered efficiency.
-              </p>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-6">
-            <div class="feature-card">
-              <div class="feature-icon-box">
-                <i class="fas fa-map-location"></i>
-              </div>
-              <h4 class="fw-bold fs-5 mb-2">Interactive Navigation</h4>
-              <p class="text-muted small mb-0">
-                Accurate GPS coordinates with direct Google Maps route planning for hassle-free travel orientation.
-              </p>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-6">
-            <div class="feature-card">
-              <div class="feature-icon-box">
-                <i class="fas fa-bookmark"></i>
-              </div>
-              <h4 class="fw-bold fs-5 mb-2">Favorites Bookmarking</h4>
-              <p class="text-muted small mb-0">
-                Save prospective destinations to guest local storage without requiring complex account registrations.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Travel Inspiration Call to Action -->
-    <section class="py-5 text-white" style="background: linear-gradient(135deg, #0284c7 0%, #059669 100%);">
-      <div class="container text-center py-4">
-        <h2 class="display-6 fw-extrabold mb-3">Ready to Plan Your Next Journey?</h2>
-        <p class="lead mb-4 mx-auto" style="max-width: 650px; opacity: 0.95;">
-          Browse through our curated directory of heritage monuments, hill resorts, and sacred pilgrimage centers.
-        </p>
-        <div class="d-flex justify-content-center gap-3 flex-wrap">
-          <a href="destinations.html" class="btn btn-light btn-lg rounded-pill px-4 fw-bold text-primary shadow">
-            <i class="fas fa-compass me-2"></i>Browse Destinations
-          </a>
-          <a href="contact.html" class="btn btn-outline-light btn-lg rounded-pill px-4 fw-bold">
-            <i class="fas fa-headset me-2"></i>Contact Tourism Helpdesk
-          </a>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- Global Footer -->
-  <footer class="footer-main">
+  <!-- Footer -->
+  <footer>
     <div class="container">
       <div class="row g-4">
-        <div class="col-lg-4 col-md-6">
-          <div class="d-flex align-items-center gap-2 mb-3">
-            <div class="brand-icon-wrapper" style="width: 38px; height: 38px; font-size: 1rem;">
-              <i class="fas fa-map-location-dot"></i>
-            </div>
-            <span class="footer-brand-title mb-0">Tourist Attraction Portal</span>
-          </div>
-          <p class="small text-muted mb-3">
-            A comprehensive, modern tourist information platform developed as a college academic project. Designed to empower tourists with authentic destination facts, timings, and regional travel advice.
+        <div class="col-md-4">
+          <h5>Tourist Attraction Portal</h5>
+          <p class="small text-light" style="opacity: 0.85;">
+            A simple, responsive, and functional web application developed as a college academic assignment to help tourists discover places of interest across India.
           </p>
-          <div class="d-flex gap-2">
-            <span class="badge bg-secondary text-light">Node.js</span>
-            <span class="badge bg-secondary text-light">Express.js</span>
-            <span class="badge bg-secondary text-light">SQLite</span>
-            <span class="badge bg-secondary text-light">Bootstrap 5</span>
-          </div>
+          <div class="badge bg-secondary">Academic Assignment</div>
+          <div class="badge bg-secondary">Express + SQLite</div>
         </div>
 
-        <div class="col-lg-2 col-md-6 col-6">
-          <h5 class="footer-heading">Quick Links</h5>
-          <ul class="footer-links">
-            <li><a href="index.html"><i class="fas fa-chevron-right me-1 small"></i> Home</a></li>
-            <li><a href="destinations.html"><i class="fas fa-chevron-right me-1 small"></i> All Destinations</a></li>
-            <li><a href="favorites.html"><i class="fas fa-chevron-right me-1 small"></i> Saved Favorites</a></li>
-            <li><a href="travel-tips.html"><i class="fas fa-chevron-right me-1 small"></i> Travel Tips</a></li>
-            <li><a href="about.html"><i class="fas fa-chevron-right me-1 small"></i> About Project</a></li>
-            <li><a href="contact.html"><i class="fas fa-chevron-right me-1 small"></i> Contact Us</a></li>
+        <div class="col-md-2 col-6">
+          <h5>Quick Links</h5>
+          <ul class="list-unstyled">
+            <li class="mb-1"><a href="index.html">Home</a></li>
+            <li class="mb-1"><a href="destinations.html">Destinations</a></li>
+            <li class="mb-1"><a href="favorites.html">My Favorites</a></li>
+            <li class="mb-1"><a href="travel-tips.html">Travel Tips</a></li>
+            <li class="mb-1"><a href="about.html">About Project</a></li>
+            <li class="mb-1"><a href="contact.html">Contact Us</a></li>
           </ul>
         </div>
 
-        <div class="col-lg-3 col-md-6 col-6">
-          <h5 class="footer-heading">Top Categories</h5>
-          <ul class="footer-links">
-            <li><a href="destinations.html?category=Historical%20Monuments">Historical Monuments</a></li>
-            <li><a href="destinations.html?category=Temples%20and%20Religious%20Places">Temples & Religious</a></li>
-            <li><a href="destinations.html?category=Hill%20Stations">Hill Stations</a></li>
-            <li><a href="destinations.html?category=Beaches">Beaches & Coastal</a></li>
-            <li><a href="destinations.html?category=Lakes%20and%20Natural%20Attractions">Lakes & Nature</a></li>
-            <li><a href="destinations.html?category=Adventure%20Destinations">Adventure Spots</a></li>
+        <div class="col-md-3 col-6">
+          <h5>Categories</h5>
+          <ul class="list-unstyled">
+            <li class="mb-1"><a href="destinations.html?category=Historical%20Monuments">Historical Monuments</a></li>
+            <li class="mb-1"><a href="destinations.html?category=Temples%20and%20Religious%20Places">Temples & Religious</a></li>
+            <li class="mb-1"><a href="destinations.html?category=Hill%20Stations">Hill Stations</a></li>
+            <li class="mb-1"><a href="destinations.html?category=Beaches">Beaches</a></li>
+            <li class="mb-1"><a href="destinations.html?category=Waterfalls">Waterfalls</a></li>
           </ul>
         </div>
 
-        <div class="col-lg-3 col-md-6">
-          <h5 class="footer-heading">Academic Project</h5>
-          <p class="small text-muted mb-2">
-            <strong>Project:</strong> Tourist Attraction Information Service Portal<br>
-            <strong>Stack:</strong> HTML5, CSS3, JS, Node, Express, SQLite<br>
-            <strong>Port:</strong> <code class="text-info">http://localhost:3000</code>
+        <div class="col-md-3">
+          <h5>Project Submission</h5>
+          <p class="small text-light mb-1" style="opacity: 0.85;">
+            <strong>Course:</strong> B.Tech / CSE<br>
+            <strong>Project Title:</strong> Tourist Attraction Information Service Portal<br>
+            <strong>Local URL:</strong> <code>http://localhost:3000</code>
           </p>
-          <div class="p-2 rounded bg-dark border border-secondary small">
-            <i class="fas fa-graduation-cap text-warning me-1"></i> Developed for academic evaluation. Open source & responsive.
-          </div>
         </div>
       </div>
 
-      <div class="footer-bottom text-center">
-        <p class="mb-1 text-muted">
-          &copy; 2026 Tourist Attraction Information Service Portal. All rights reserved. Academic Project Demonstration.
-        </p>
+      <div class="footer-bottom">
+        <p class="mb-1">&copy; 2026 Tourist Attraction Information Service Portal. College Academic Project Demonstration.</p>
         <p class="mb-0 text-muted" style="font-size: 0.775rem;">
-          <i class="fas fa-info-circle me-1"></i> Disclaimer: All attraction details, visiting hours, and fees are realistic educational sample data. Visitors are advised to verify officially before traveling.
+          * Note: Information and timings are realistic educational sample data. Tourists are advised to verify officially before traveling.
         </p>
       </div>
     </div>
   </footer>
 
-  <!-- Bootstrap JS Bundle -->
+  <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <!-- API Service & Global Scripts -->
+  <!-- API & Global JS -->
   <script src="js/api.js"></script>
   <script src="js/app.js"></script>
-  <!-- Home Page Script -->
+
+  <!-- Simple Page Script -->
   <script>
     document.addEventListener('DOMContentLoaded', async () => {
-      const featuredGrid = document.getElementById('featuredGrid');
-      const categoriesRow = document.getElementById('categoriesRow');
-      const statDestCount = document.getElementById('statDestCount');
-      const statCatCount = document.getElementById('statCatCount');
-      const statStatesCount = document.getElementById('statStatesCount');
+      const featuredRow = document.getElementById('featuredDestinationsRow');
+      const catContainer = document.getElementById('categoriesContainer');
 
-      // Category Icon Mapper
-      const catIcons = {
+      // Category Icons
+      const categoryIcons = {
         'Historical Monuments': 'fa-monument',
-        'Temples and Religious Places': 'fa-gopuram',
+        'Temples and Religious Places': 'fa-place-of-worship',
         'Beaches': 'fa-umbrella-beach',
-        'Hill Stations': 'fa-mountain-sun',
+        'Hill Stations': 'fa-mountain',
         'Waterfalls': 'fa-water',
         'Wildlife Sanctuaries': 'fa-paw',
-        'Museums': 'fa-building-columns',
-        'Adventure Destinations': 'fa-person-hiking',
+        'Museums': 'fa-landmark',
+        'Adventure Destinations': 'fa-hiking',
         'Lakes and Natural Attractions': 'fa-tree'
       };
 
       try {
-        // Fetch stats and featured destinations (at least 8 as requested)
+        // Fetch 8 featured attractions and stats from backend
         const [destRes, statsRes, catRes] = await Promise.all([
           ApiService.getDestinations({ limit: 8, sort: 'name_asc' }),
           ApiService.getStats(),
@@ -404,30 +322,28 @@
 
         // Render Stats
         if (statsRes.success && statsRes.stats) {
-          if (statDestCount) statDestCount.textContent = `${statsRes.stats.totalDestinations}+`;
-          if (statCatCount) statCatCount.textContent = statsRes.stats.totalCategories;
-          if (statStatesCount) statStatesCount.textContent = `${statsRes.stats.totalStates}+`;
+          document.getElementById('statDest').textContent = statsRes.stats.totalDestinations + '+';
+          document.getElementById('statCat').textContent = statsRes.stats.totalCategories;
+          document.getElementById('statStates').textContent = statsRes.stats.totalStates + '+';
         }
 
-        // Render Featured Destinations (8 cards)
+        // Render 8 Sample Tourist Attractions
         if (destRes.success && destRes.data && destRes.data.length > 0) {
-          featuredGrid.innerHTML = destRes.data.map(createDestinationCard).join('');
+          featuredRow.innerHTML = destRes.data.map(createDestinationCard).join('');
         } else {
-          featuredGrid.innerHTML = '<div class="col-12 text-center text-muted py-4">No destinations available.</div>';
+          featuredRow.innerHTML = '<div class="col-12 text-center text-muted">No attractions found.</div>';
         }
 
-        // Render Categories
+        // Render Category Boxes
         if (catRes.success && catRes.data) {
-          categoriesRow.innerHTML = catRes.data.map(cat => {
-            const icon = catIcons[cat.category] || 'fa-map-pin';
+          catContainer.innerHTML = catRes.data.map(c => {
+            const icon = categoryIcons[c.category] || 'fa-map-pin';
             return `
               <div class="col-lg-4 col-md-6 col-sm-6">
-                <div class="category-card" onclick="window.location.href='destinations.html?category=${encodeURIComponent(cat.category)}'">
-                  <div class="category-card-icon">
-                    <i class="fas ${icon}"></i>
-                  </div>
-                  <h3 class="category-card-title">${cat.category}</h3>
-                  <span class="category-card-count">${cat.count} Destination${cat.count > 1 ? 's' : ''}</span>
+                <div class="category-box" onclick="window.location.href='destinations.html?category=${encodeURIComponent(c.category)}'">
+                  <i class="fas ${icon}"></i>
+                  <h4>${c.category}</h4>
+                  <span>${c.count} Places to explore</span>
                 </div>
               </div>
             `;
@@ -435,16 +351,8 @@
         }
 
       } catch (err) {
-        console.error('Home page data load error:', err);
-        if (featuredGrid) {
-          featuredGrid.innerHTML = `
-            <div class="col-12 text-center py-4">
-              <div class="alert alert-warning d-inline-block">
-                Backend service connecting at <code>${window.location.origin}</code>...
-              </div>
-            </div>
-          `;
-        }
+        console.error('Home load error:', err);
+        featuredRow.innerHTML = '<div class="col-12 text-center text-danger py-4">Error loading data from server. Please verify backend is running.</div>';
       }
     });
   </script>

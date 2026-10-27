@@ -3,336 +3,226 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact Us | Tourist Attraction Information Service Portal</title>
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <title>Contact Us | Tourist Attraction Portal</title>
   <!-- Bootstrap 5 CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Font Awesome 6 Icons -->
+  <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <!-- Custom Styles -->
+  <!-- Simple Custom Styles -->
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-  <!-- Top Navigation Bar -->
-  <header>
-    <nav class="navbar navbar-expand-lg navbar-custom sticky-top">
-      <div class="container">
-        <a class="brand-logo" href="index.html">
-          <div class="brand-icon-wrapper">
-            <i class="fas fa-map-location-dot"></i>
-          </div>
-          <div>
-            <div class="brand-text-name">Tourist Attraction Portal</div>
-            <div class="brand-text-sub">Academic Tourism Service</div>
-          </div>
-        </a>
-
-        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
-          <i class="fas fa-bars text-dark fs-4"></i>
-        </button>
-
-        <div class="collapse navbar-collapse" id="mainNavbar">
-          <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center">
-            <li class="nav-item">
-              <a class="nav-link" href="index.html"><i class="fas fa-house me-1"></i> Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="destinations.html"><i class="fas fa-compass me-1"></i> Explore Destinations</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="favorites.html">
-                <i class="fas fa-heart me-1 text-danger"></i> Favorites
-                <span class="badge bg-danger badge-counter favorites-count-badge" style="display: none;">0</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="travel-tips.html"><i class="fas fa-lightbulb me-1"></i> Travel Tips</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="about.html"><i class="fas fa-circle-info me-1"></i> About Us</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link active" href="contact.html"><i class="fas fa-envelope me-1"></i> Contact</a>
-            </li>
-            <li class="nav-item ms-lg-2">
-              <a class="btn btn-outline-primary btn-sm rounded-pill px-3 fw-bold" href="admin.html">
-                <i class="fas fa-shield-halved me-1"></i> Admin
-              </a>
-            </li>
-          </ul>
-        </div>
+  <!-- College Top Bar -->
+  <div class="college-top-bar">
+    <div class="container d-flex justify-content-between align-items-center">
+      <div>
+        <i class="fas fa-graduation-cap me-1"></i> <strong>College Academic Project:</strong> Tourist Attraction Information Service Portal
       </div>
-    </nav>
-  </header>
+      <div class="d-none d-md-block">
+        Department of Computer Science & Engineering
+      </div>
+    </div>
+  </div>
 
-  <main class="py-5">
+  <!-- Navigation Bar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom sticky-top">
     <div class="container">
-      <!-- Breadcrumbs -->
-      <nav aria-label="breadcrumb" class="mb-4">
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item active" aria-current="page">Contact Us</li>
-        </ol>
-      </nav>
+      <a class="navbar-brand d-flex align-items-center" href="index.html">
+        <div class="p-2 bg-primary text-white rounded me-2">
+          <i class="fas fa-map-marked-alt fa-lg"></i>
+        </div>
+        <div>
+          <span class="navbar-brand-title">Tourist Attraction Portal</span>
+          <span class="navbar-brand-sub">Tourism Information Service</span>
+        </div>
+      </a>
 
-      <!-- Section Header -->
-      <div class="text-center mb-5">
-        <span class="section-tag"><i class="fas fa-headset me-1"></i> Get in Touch</span>
-        <h1 class="section-title">Contact Tourism Helpdesk</h1>
-        <p class="section-subtitle">
-          Have an inquiry, feedback regarding an attraction, or suggestions for our academic portal? Send us a message and our team will get back to you.
-        </p>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html"><i class="fas fa-home me-1"></i> Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="destinations.html"><i class="fas fa-compass me-1"></i> Explore Destinations</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="favorites.html">
+              <i class="fas fa-heart text-danger me-1"></i> Favorites
+              <span class="badge bg-danger favorites-count-badge" style="display: none;">0</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="travel-tips.html"><i class="fas fa-lightbulb me-1"></i> Travel Tips</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="about.html"><i class="fas fa-info-circle me-1"></i> About Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="contact.html"><i class="fas fa-envelope me-1"></i> Contact Us</a>
+          </li>
+          <li class="nav-item ms-lg-2">
+            <a class="btn btn-sm btn-outline-primary" href="admin.html">
+              <i class="fas fa-user-lock me-1"></i> Admin
+            </a>
+          </li>
+        </ul>
       </div>
+    </div>
+  </nav>
 
-      <div class="row g-4">
-        <!-- Contact Form Column -->
+  <!-- Page Header -->
+  <div class="bg-light py-4 border-bottom">
+    <div class="container text-center">
+      <h1 class="h3 fw-bold text-dark mb-1">Contact Us</h1>
+      <p class="text-muted mb-0 small">Send your feedback, tourist inquiries, or destination suggestions directly to our database.</p>
+    </div>
+  </div>
+
+  <main class="py-4">
+    <div class="container">
+      <div class="row g-4 justify-content-center">
+        <!-- Contact Form -->
         <div class="col-lg-7">
-          <div class="p-4 p-md-5 bg-white rounded-4 border shadow-sm h-100">
-            <h2 class="h4 fw-bold text-dark mb-4">
-              <i class="fas fa-paper-plane text-primary me-2"></i>Send Us an Inquiry
-            </h2>
+          <div class="bg-white p-4 border rounded shadow-sm">
+            <h4 class="h5 fw-bold text-dark mb-3">
+              <i class="fas fa-paper-plane text-primary me-2"></i>Send a Message
+            </h4>
 
             <!-- Feedback Alert (Success / Error message container) -->
             <div id="contactAlert" style="display: none;"></div>
 
             <form id="contactForm" novalidate>
               <div class="mb-3">
-                <label for="contactName" class="form-label fw-bold small text-dark">
-                  Full Name <span class="text-danger">*</span>
-                </label>
-                <div class="input-group">
-                  <span class="input-group-text bg-light border-end-0"><i class="fas fa-user text-muted"></i></span>
-                  <input 
-                    type="text" 
-                    class="form-control border-start-0 py-2" 
-                    id="contactName" 
-                    placeholder="Enter your full name" 
-                    required 
-                    minlength="2"
-                  >
-                </div>
+                <label for="contactName" class="form-label small fw-bold">Full Name <span class="text-danger">*</span></label>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  id="contactName" 
+                  placeholder="Enter your name" 
+                  required 
+                  minlength="2"
+                >
               </div>
 
               <div class="mb-3">
-                <label for="contactEmail" class="form-label fw-bold small text-dark">
-                  Email Address <span class="text-danger">*</span>
-                </label>
-                <div class="input-group">
-                  <span class="input-group-text bg-light border-end-0"><i class="fas fa-envelope text-muted"></i></span>
-                  <input 
-                    type="email" 
-                    class="form-control border-start-0 py-2" 
-                    id="contactEmail" 
-                    placeholder="name@example.com" 
-                    required
-                  >
-                </div>
+                <label for="contactEmail" class="form-label small fw-bold">Email Address <span class="text-danger">*</span></label>
+                <input 
+                  type="email" 
+                  class="form-control" 
+                  id="contactEmail" 
+                  placeholder="name@example.com" 
+                  required
+                >
               </div>
 
               <div class="mb-3">
-                <label for="contactSubject" class="form-label fw-bold small text-dark">
-                  Subject <span class="text-danger">*</span>
-                </label>
-                <div class="input-group">
-                  <span class="input-group-text bg-light border-end-0"><i class="fas fa-heading text-muted"></i></span>
-                  <input 
-                    type="text" 
-                    class="form-control border-start-0 py-2" 
-                    id="contactSubject" 
-                    placeholder="What is your message regarding?" 
-                    required 
-                    minlength="3"
-                  >
-                </div>
+                <label for="contactSubject" class="form-label small fw-bold">Subject <span class="text-danger">*</span></label>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  id="contactSubject" 
+                  placeholder="Topic of your inquiry" 
+                  required 
+                  minlength="3"
+                >
               </div>
 
-              <div class="mb-4">
-                <label for="contactMessage" class="form-label fw-bold small text-dark">
-                  Your Message <span class="text-danger">*</span>
-                </label>
+              <div class="mb-3">
+                <label for="contactMessage" class="form-label small fw-bold">Message <span class="text-danger">*</span></label>
                 <textarea 
-                  class="form-control py-2" 
+                  class="form-control" 
                   id="contactMessage" 
                   rows="5" 
-                  placeholder="Type your message here with details regarding destinations, corrections, or inquiries..." 
+                  placeholder="Write your message here (minimum 10 characters)..." 
                   required 
                   minlength="10"
                 ></textarea>
-                <div class="form-text small text-muted">Minimum 10 characters required. Saved securely to database.</div>
+                <div class="form-text small text-muted">Messages are validated and stored in SQLite table <code>contact_messages</code>.</div>
               </div>
 
-              <button type="submit" id="contactSubmitBtn" class="btn btn-primary btn-lg rounded-pill px-5 fw-bold shadow-sm">
-                <i class="fas fa-paper-plane me-2"></i>Send Message
+              <button type="submit" id="contactSubmitBtn" class="btn btn-primary px-4 fw-bold">
+                <i class="fas fa-paper-plane me-1"></i> Send Message
               </button>
             </form>
           </div>
         </div>
 
-        <!-- Sidebar: Contact Info & Academic Context -->
+        <!-- Sidebar Information -->
         <div class="col-lg-5">
-          <div class="p-4 bg-white rounded-4 border shadow-sm mb-4">
-            <h3 class="h5 fw-bold text-dark mb-3">
-              <i class="fas fa-circle-question text-secondary me-2"></i>Helpdesk & Office Information
-            </h3>
-            
-            <div class="d-flex align-items-start gap-3 mb-3">
-              <div class="stat-icon" style="width: 44px; height: 44px; font-size: 1.1rem;">
-                <i class="fas fa-envelope"></i>
-              </div>
-              <div>
-                <div class="fw-bold text-dark">Email Support</div>
-                <div class="text-muted small">support@touristportal.edu</div>
-              </div>
-            </div>
-
-            <div class="d-flex align-items-start gap-3 mb-3">
-              <div class="stat-icon green" style="width: 44px; height: 44px; font-size: 1.1rem;">
-                <i class="fas fa-phone"></i>
-              </div>
-              <div>
-                <div class="fw-bold text-dark">Helpline (Academic Hours)</div>
-                <div class="text-muted small">+91 (040) 2345-6789 (10 AM - 5 PM IST)</div>
-              </div>
-            </div>
-
-            <div class="d-flex align-items-start gap-3 mb-3">
-              <div class="stat-icon accent" style="width: 44px; height: 44px; font-size: 1.1rem;">
-                <i class="fas fa-building-columns"></i>
-              </div>
-              <div>
-                <div class="fw-bold text-dark">Department Lab Location</div>
-                <div class="text-muted small">Department of Computer Science & Engineering, College Campus</div>
-              </div>
-            </div>
-
-            <div class="d-flex align-items-start gap-3">
-              <div class="stat-icon" style="width: 44px; height: 44px; font-size: 1.1rem; background: #e0e7ff; color: #4338ca;">
-                <i class="fas fa-clock"></i>
-              </div>
-              <div>
-                <div class="fw-bold text-dark">Service Availability</div>
-                <div class="text-muted small">Web Portal 24/7; Inquiries processed within 24 hours</div>
-              </div>
+          <div class="bg-white p-4 border rounded shadow-sm mb-4">
+            <h4 class="h5 fw-bold text-dark mb-3">
+              <i class="fas fa-university text-success me-2"></i>Project Information
+            </h4>
+            <p class="small text-muted mb-2">
+              <strong>College Project:</strong> Tourist Attraction Information Service Portal<br>
+              <strong>Academic Lab:</strong> Computer Science & Engineering Lab<br>
+              <strong>Backend Endpoint:</strong> <code>POST /api/contact</code>
+            </p>
+            <div class="p-2 bg-light border rounded small text-muted">
+              <i class="fas fa-database text-primary me-1"></i> Submitting this form tests frontend validation and inserts a real record into the database.
             </div>
           </div>
 
-          <!-- FAQ Accordion -->
-          <div class="p-4 bg-white rounded-4 border shadow-sm">
-            <h3 class="h5 fw-bold text-dark mb-3">
-              <i class="fas fa-circle-info text-primary me-2"></i>Frequently Asked Questions
-            </h3>
-
-            <div class="accordion accordion-flush" id="faqAccordion">
-              <div class="accordion-item">
-                <h4 class="accordion-header" id="faq1">
-                  <button class="accordion-button collapsed fw-bold small" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1">
-                    Are the entry fees and timings officially guaranteed?
-                  </button>
-                </h4>
-                <div id="collapse1" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                  <div class="accordion-body small text-muted">
-                    No. The timings and fees presented are realistic educational sample data compiled for this academic project. Visitors should verify directly with local state tourism boards before visiting.
-                  </div>
-                </div>
-              </div>
-
-              <div class="accordion-item">
-                <h4 class="accordion-header" id="faq2">
-                  <button class="accordion-button collapsed fw-bold small" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2">
-                    How are favorites preserved without an account?
-                  </button>
-                </h4>
-                <div id="collapse2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                  <div class="accordion-body small text-muted">
-                    The portal utilizes client-side HTML5 <code>localStorage</code>, which stores your bookmarked attraction IDs locally inside your web browser across page reloads.
-                  </div>
-                </div>
-              </div>
-
-              <div class="accordion-item">
-                <h4 class="accordion-header" id="faq3">
-                  <button class="accordion-button collapsed fw-bold small" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3">
-                    Where are contact messages stored?
-                  </button>
-                </h4>
-                <div id="collapse3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                  <div class="accordion-body small text-muted">
-                    Submissions are transmitted via a REST POST endpoint and inserted into the persistent SQLite database table <code>contact_messages</code> with auto-incremented IDs and timestamps.
-                  </div>
-                </div>
-              </div>
+          <div class="bg-white p-4 border rounded shadow-sm">
+            <h4 class="h5 fw-bold text-dark mb-3">
+              <i class="fas fa-question-circle text-primary me-2"></i>Frequently Asked Questions
+            </h4>
+            <div class="small text-muted">
+              <p class="mb-2"><strong>Q: Where are inquiries saved?</strong><br>
+              They are saved directly to the SQLite <code>contact_messages</code> table via Express.</p>
+              
+              <p class="mb-0"><strong>Q: How can admins view messages?</strong><br>
+              Admins can log into the Admin Dashboard using the secret key (<code>admin123</code>) to view inquiries.</p>
             </div>
           </div>
-
         </div>
       </div>
     </div>
   </main>
 
-  <!-- Global Footer -->
-  <footer class="footer-main">
+  <!-- Footer -->
+  <footer>
     <div class="container">
       <div class="row g-4">
-        <div class="col-lg-4 col-md-6">
-          <div class="d-flex align-items-center gap-2 mb-3">
-            <div class="brand-icon-wrapper" style="width: 38px; height: 38px; font-size: 1rem;">
-              <i class="fas fa-map-location-dot"></i>
-            </div>
-            <span class="footer-brand-title mb-0">Tourist Attraction Portal</span>
-          </div>
-          <p class="small text-muted mb-3">
-            Academic college project showcasing full-stack travel destination directory with REST APIs, interactive maps, and persistent favorites.
+        <div class="col-md-4">
+          <h5>Tourist Attraction Portal</h5>
+          <p class="small text-light" style="opacity: 0.85;">
+            College academic project built using Express.js and SQLite to deliver a simple, responsive tourism guide.
           </p>
         </div>
-
-        <div class="col-lg-2 col-md-6 col-6">
-          <h5 class="footer-heading">Quick Links</h5>
-          <ul class="footer-links">
+        <div class="col-md-4">
+          <h5>Quick Links</h5>
+          <ul class="list-unstyled">
             <li><a href="index.html">Home</a></li>
-            <li><a href="destinations.html">All Destinations</a></li>
+            <li><a href="destinations.html">Explore Destinations</a></li>
             <li><a href="favorites.html">Saved Favorites</a></li>
             <li><a href="travel-tips.html">Travel Tips</a></li>
-            <li><a href="about.html">About Project</a></li>
-            <li><a href="contact.html">Contact Us</a></li>
           </ul>
         </div>
-
-        <div class="col-lg-3 col-md-6 col-6">
-          <h5 class="footer-heading">Categories</h5>
-          <ul class="footer-links">
-            <li><a href="destinations.html?category=Historical%20Monuments">Historical Monuments</a></li>
-            <li><a href="destinations.html?category=Temples%20and%20Religious%20Places">Temples & Religious</a></li>
-            <li><a href="destinations.html?category=Hill%20Stations">Hill Stations</a></li>
-            <li><a href="destinations.html?category=Beaches">Beaches & Coastal</a></li>
-          </ul>
-        </div>
-
-        <div class="col-lg-3 col-md-6">
-          <h5 class="footer-heading">Academic Portal</h5>
-          <p class="small text-muted mb-0">
-            Node.js, Express, SQLite, and vanilla ES6 frontend.
+        <div class="col-md-4">
+          <h5>Academic Evaluation</h5>
+          <p class="small text-light" style="opacity: 0.85;">
+            Developed for college project submission. Fully working backend REST API and persistent SQLite database.
           </p>
         </div>
       </div>
-
-      <div class="footer-bottom text-center">
-        <p class="mb-0 text-muted small">
-          &copy; 2026 Tourist Attraction Information Service Portal. All rights reserved. Academic Demonstration.
-        </p>
+      <div class="footer-bottom">
+        <p class="mb-0">&copy; 2026 Tourist Attraction Information Service Portal.</p>
       </div>
     </div>
   </footer>
 
-  <!-- Bootstrap JS Bundle -->
+  <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <!-- API Service & Global Scripts -->
+  <!-- API & Global JS -->
   <script src="js/api.js"></script>
   <script src="js/app.js"></script>
-  <!-- Contact Page Script -->
+  <!-- Contact Form JS -->
   <script src="js/contact.js"></script>
 </body>
 </html>

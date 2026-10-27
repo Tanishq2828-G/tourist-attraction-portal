@@ -1,27 +1,31 @@
 /**
- * Global Application Scripts - Tourist Attraction Information Service Portal
- * Manages favorites persistence, toast alerts, card rendering, and UI states.
+ * Global JavaScript Helpers - Tourist Attraction Information Service Portal
+ * College Academic Project
+ * Handles: Favorites in localStorage, toast messages, and destination card HTML generator.
  */
 
-const STORAGE_KEY_FAVORITES = 'tourist_portal_favorites_v1';
+const FAVORITES_KEY = 'tourist_portal_favorites';
 
-// Favorites Store (using browser localStorage)
+// 1. Manage Favorites in localStorage
 const FavoritesManager = {
+  // Get all saved destination IDs
   getAll() {
     try {
-      const data = localStorage.getItem(STORAGE_KEY_FAVORITES);
+      const data = localStorage.getItem(FAVORITES_KEY);
       return data ? JSON.parse(data) : [];
     } catch (e) {
-      console.warn('LocalStorage access issue:', e);
+      console.warn('LocalStorage error:', e);
       return [];
     }
   },
 
+  // Check if an ID is favorited
   isFavorite(id) {
     const list = this.getAll();
     return list.includes(Number(id));
   },
 
+  // Add or remove an ID from favorites
   toggle(id) {
     const numId = Number(id);
     let list = this.getAll();
@@ -36,14 +40,14 @@ const FavoritesManager = {
     }
 
     try {
-      localStorage.setItem(STORAGE_KEY_FAVORITES, JSON.stringify(list));
+      localStorage.setItem(FAVORITES_KEY, JSON.stringify(list));
     } catch (e) {
-      console.error('Failed to save to localStorage:', e);
+      console.error('LocalStorage write failed:', e);
     }
 
     this.updateBadges();
 
-    // Trigger custom event so any active page view updates immediately
+    // Notify other components on the page
     window.dispatchEvent(new CustomEvent('favoritesUpdated', {
       detail: { id: numId, isAdded, list }
     }));
@@ -51,6 +55,7 @@ const FavoritesManager = {
     return isAdded;
   },
 
+  // Update count badge in navigation bar
   updateBadges() {
     const count = this.getAll().length;
     document.querySelectorAll('.favorites-count-badge').forEach(badge => {
@@ -62,8 +67,8 @@ const FavoritesManager = {
 
 window.FavoritesManager = FavoritesManager;
 
-// Toast Notification System
-function showToast(message, type = 'info', duration = 3500) {
+// 2. Simple Toast Notification
+function showToast(message, type = 'info', duration = 3000) {
   let container = document.getElementById('toastContainer');
   if (!container) {
     container = document.createElement('div');
@@ -73,85 +78,56 @@ function showToast(message, type = 'info', duration = 3500) {
   }
 
   const toast = document.createElement('div');
-  toast.className = `custom-toast ${type}`;
-
-  let icon = 'fa-info-circle';
+  toast.className = `toast-simple ${type}`;
+  let icon = 'fa-info-circle text-primary';
   if (type === 'success') icon = 'fa-check-circle text-success';
   if (type === 'error') icon = 'fa-exclamation-triangle text-danger';
 
-  toast.innerHTML = `
-    <i class="fas ${icon} fa-lg"></i>
-    <div class="flex-grow-1" style="font-size: 0.95rem; font-weight: 600;">${message}</div>
-    <button type="button" class="btn-close btn-sm" aria-label="Close" style="font-size: 0.75rem;"></button>
-  `;
-
-  const closeBtn = toast.querySelector('.btn-close');
-  closeBtn.addEventListener('click', () => {
-    toast.remove();
-  });
-
+  toast.innerHTML = `<i class="fas ${icon}"></i> <span>${message}</span>`;
   container.appendChild(toast);
 
   setTimeout(() => {
-    if (toast.parentNode) {
-      toast.style.opacity = '0';
-      toast.style.transform = 'translateX(100%)';
-      setTimeout(() => toast.remove(), 300);
-    }
+    toast.remove();
   }, duration);
 }
 
 window.showToast = showToast;
 
-/**
- * Generates an HTML card for a destination
- */
+// 3. Create a Simple Destination Card HTML
 function createDestinationCard(dest) {
   const isFav = FavoritesManager.isFavorite(dest.id);
-  const fallbackImg = '/images/placeholder.svg';
+  const fallbackImg = 'images/placeholder.svg';
 
   return `
     <div class="col-lg-4 col-md-6 mb-4 destination-card-col" data-id="${dest.id}">
-      <div class="destination-card h-100">
-        <div class="card-img-wrapper">
-          <img 
-            src="${dest.image_url || fallbackImg}" 
-            alt="${dest.name}" 
-            loading="lazy"
-            onerror="this.onerror=null; this.src='${fallbackImg}';"
-          >
-          <span class="card-category-badge">
-            <i class="fas fa-tag me-1"></i>${dest.category}
-          </span>
-          <button 
-            type="button"
-            class="card-favorite-btn ${isFav ? 'favorited' : ''}" 
-            data-id="${dest.id}" 
-            title="${isFav ? 'Remove from favorites' : 'Add to favorites'}"
-            aria-label="Toggle favorite for ${dest.name}"
-            onclick="handleCardFavoriteClick(event, ${dest.id})"
-          >
-            <i class="${isFav ? 'fas text-danger' : 'far'} fa-heart"></i>
-          </button>
-        </div>
-
-        <div class="card-body-content">
-          <div class="card-location">
-            <i class="fas fa-map-marker-alt"></i>
-            <span>${dest.city}, ${dest.state}</span>
-          </div>
-          
+      <div class="card-destination">
+        <img 
+          src="${dest.image_url || fallbackImg}" 
+          alt="${dest.name}" 
+          class="card-img"
+          loading="lazy"
+          onerror="this.onerror=null; this.src='${fallbackImg}';"
+        >
+        <div class="card-body">
+          <span class="card-category">${dest.category}</span>
           <h3 class="card-title">${dest.name}</h3>
+          <div class="card-location">
+            <i class="fas fa-map-marker-alt"></i> ${dest.city}, ${dest.state}
+          </div>
+          <p class="card-text">${dest.description}</p>
           
-          <p class="card-description">${dest.description}</p>
-          
-          <div class="card-meta-row">
-            <span class="text-muted small fw-medium">
-              <i class="far fa-clock me-1 text-primary"></i>${dest.recommended_duration || '2-3 hours'}
-            </span>
-            <a href="destination-details.html?id=${dest.id}" class="btn-details">
-              View Details <i class="fas fa-arrow-right"></i>
+          <div class="card-actions">
+            <a href="destination-details.html?id=${dest.id}" class="btn btn-sm btn-primary">
+              <i class="fas fa-eye me-1"></i> View Details
             </a>
+            <button 
+              type="button" 
+              class="btn btn-sm ${isFav ? 'btn-danger' : 'btn-outline-danger'} card-fav-btn" 
+              onclick="handleCardFavoriteClick(event, ${dest.id})"
+            >
+              <i class="${isFav ? 'fas' : 'far'} fa-heart"></i>
+              <span class="ms-1">${isFav ? 'Favorited' : 'Favorite'}</span>
+            </button>
           </div>
         </div>
       </div>
@@ -161,56 +137,40 @@ function createDestinationCard(dest) {
 
 window.createDestinationCard = createDestinationCard;
 
-// Card Favorite Click Event Handler
+// 4. Click Handler for Card Favorite Button
 function handleCardFavoriteClick(event, id) {
   event.preventDefault();
   event.stopPropagation();
   const isAdded = FavoritesManager.toggle(id);
-  
-  // Update button visual
   const btn = event.currentTarget;
+
   if (isAdded) {
-    btn.classList.add('favorited');
-    btn.innerHTML = '<i class="fas text-danger fa-heart"></i>';
-    btn.title = 'Remove from favorites';
-    showToast('Added to your favorite destinations!', 'success');
+    btn.className = 'btn btn-sm btn-danger card-fav-btn';
+    btn.innerHTML = '<i class="fas fa-heart"></i> <span class="ms-1">Favorited</span>';
+    showToast('Destination added to your favorites!', 'success');
   } else {
-    btn.classList.remove('favorited');
-    btn.innerHTML = '<i class="far fa-heart"></i>';
-    btn.title = 'Add to favorites';
-    showToast('Removed from your favorites.', 'info');
+    btn.className = 'btn btn-sm btn-outline-danger card-fav-btn';
+    btn.innerHTML = '<i class="far fa-heart"></i> <span class="ms-1">Favorite</span>';
+    showToast('Removed from favorites.', 'info');
   }
 }
 
 window.handleCardFavoriteClick = handleCardFavoriteClick;
 
-// Initialize on DOM Ready
+// 5. Initialize Badges on Page Load
 document.addEventListener('DOMContentLoaded', () => {
-  // Update favorite badge counters
   FavoritesManager.updateBadges();
 
-  // Navbar scroll effect
-  const navbar = document.querySelector('.navbar-custom');
-  if (navbar) {
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 40) {
-        navbar.classList.add('scrolled');
-      } else {
-        navbar.classList.remove('scrolled');
-      }
-    });
-  }
-
-  // Sync favorites when updated in another tab or button
+  // Listen for favorites updates across buttons
   window.addEventListener('favoritesUpdated', (e) => {
     const { id, isAdded } = e.detail;
-    document.querySelectorAll(`.card-favorite-btn[data-id="${id}"]`).forEach(btn => {
+    document.querySelectorAll(`.destination-card-col[data-id="${id}"] .card-fav-btn`).forEach(btn => {
       if (isAdded) {
-        btn.classList.add('favorited');
-        btn.innerHTML = '<i class="fas text-danger fa-heart"></i>';
+        btn.className = 'btn btn-sm btn-danger card-fav-btn';
+        btn.innerHTML = '<i class="fas fa-heart"></i> <span class="ms-1">Favorited</span>';
       } else {
-        btn.classList.remove('favorited');
-        btn.innerHTML = '<i class="far fa-heart"></i>';
+        btn.className = 'btn btn-sm btn-outline-danger card-fav-btn';
+        btn.innerHTML = '<i class="far fa-heart"></i> <span class="ms-1">Favorite</span>';
       }
     });
   });
