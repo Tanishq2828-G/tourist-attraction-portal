@@ -34,8 +34,9 @@ app.use((req, res, next) => {
   next();
 });
 
-// Serve static frontend assets from public/ directory
-app.use(express.static(path.join(__dirname, 'public')));
+// Serve static frontend assets from frontend/ directory
+const frontendPath = path.join(__dirname, '..', 'frontend');
+app.use(express.static(frontendPath));
 
 // Mount routes
 const destinationRoutes = require('./routes/destinations');
