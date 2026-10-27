@@ -95,9 +95,9 @@ async function runTestSuite() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          name: 'Academic Evaluator',
-          email: 'evaluator@university.edu',
-          subject: 'Academic Demonstration Feedback',
+          name: 'Portal Visitor',
+          email: 'visitor@example.com',
+          subject: 'Website Feedback',
           message: 'The website interface is modern, clean, and fully operational.'
         })
       });

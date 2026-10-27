@@ -1,6 +1,5 @@
 /**
  * Global JavaScript Helpers - Tourist Attraction Information Service Portal
- * College Academic Project
  * Handles: Favorites in localStorage, toast messages, and destination card HTML generator.
  */
 

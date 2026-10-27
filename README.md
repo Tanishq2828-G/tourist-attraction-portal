@@ -47,6 +47,7 @@ tourist-attraction-portal/
 │   └── .env                         # Local Environment Configuration
 │
 ├── package.json                     # Root convenience scripts
+├── start.bat                        # Windows 1-click startup launcher
 ├── .gitignore                       # Git Exclusion Rules
 └── README.md                        # Project Documentation
 ```
@@ -112,13 +113,20 @@ tourist-attraction-portal/
 
 ## 4. How to Run Locally
 
-### Option A: Running from the Root Folder (Recommended)
+### Option 1: Double-Click `start.bat` (Easiest on Windows)
+Simply double-click the `start.bat` file in the project folder. It will:
+- Check for Node.js
+- Install dependencies automatically if needed
+- Start the server on `http://localhost:3000`
+- Automatically open the website in your default browser
+
+### Option 2: Running from the Root Folder in Terminal
 ```cmd
 cd tourist-attraction-portal
 npm start
 ```
 
-### Option B: Running from the Backend Folder
+### Option 3: Running from the Backend Folder
 ```cmd
 cd tourist-attraction-portal\backend
 npm install

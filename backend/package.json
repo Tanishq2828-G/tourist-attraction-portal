@@ -1,7 +1,7 @@
 {
   "name": "tourist-attraction-portal",
   "version": "1.0.0",
-  "description": "Tourist Attraction Information Service Portal - College Academic Project",
+  "description": "Tourist Attraction Information Service Portal",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
@@ -15,7 +15,7 @@
     "sqlite",
     "travel"
   ],
-  "author": "Academic Project Team",
+  "author": "",
   "license": "ISC",
   "dependencies": {
     "better-sqlite3": "^13.0.3",
