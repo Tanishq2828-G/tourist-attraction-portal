@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard | Tourist Attraction Information Service Portal</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome 6 Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-light">
+
+  <!-- Top Navigation Bar -->
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-custom sticky-top">
+      <div class="container">
+        <a class="brand-logo" href="index.html">
+          <div class="brand-icon-wrapper">
+            <i class="fas fa-shield-halved"></i>
+          </div>
+          <div>
+            <div class="brand-text-name">Portal Administration</div>
+            <div class="brand-text-sub">Management Console</div>
+          </div>
+        </a>
+
+        <div class="ms-auto d-flex align-items-center gap-2">
+          <a href="index.html" class="btn btn-outline-secondary btn-sm rounded-pill px-3">
+            <i class="fas fa-arrow-left me-1"></i> Back to Website
+          </a>
+          <button id="adminLogoutBtn" class="btn btn-danger btn-sm rounded-pill px-3" style="display: none;">
+            <i class="fas fa-sign-out-alt me-1"></i> Logout
+          </button>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main class="py-5">
+    <div class="container">
+
+      <!-- Login Gate (Shown when unauthenticated) -->
+      <div id="adminLoginGate" class="row justify-content-center py-5">
+        <div class="col-md-5">
+          <div class="p-4 p-md-5 bg-white rounded-4 border shadow-sm text-center">
+            <div class="brand-icon-wrapper mx-auto mb-3" style="width: 64px; height: 64px; font-size: 1.75rem;">
+              <i class="fas fa-lock"></i>
+            </div>
+            <h2 class="h4 fw-bold text-dark mb-2">Administrator Login</h2>
+            <p class="text-muted small mb-4">
+              Enter the administrator secret key to manage attractions and view visitor inquiries.
+            </p>
+
+            <div id="adminLoginAlert" class="alert alert-danger py-2 small" style="display: none;"></div>
+
+            <form id="adminLoginForm">
+              <div class="mb-3 text-start">
+                <label for="adminKeyInput" class="form-label small fw-bold text-dark">Admin Secret Key</label>
+                <div class="input-group">
+                  <span class="input-group-text bg-light"><i class="fas fa-key text-muted"></i></span>
+                  <input 
+                    type="password" 
+                    id="adminKeyInput" 
+                    class="form-control" 
+                    placeholder="Enter admin key (default: admin123)" 
+                    required
+                  >
+                </div>
+                <div class="form-text small text-muted">Configured in server <code>.env</code> file (ADMIN_KEY).</div>
+              </div>
+
+              <button type="submit" id="adminLoginSubmitBtn" class="btn btn-primary w-100 fw-bold py-2 rounded-3 shadow-sm">
+                <i class="fas fa-unlock me-2"></i>Authenticate
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- Admin Dashboard Content (Shown when authenticated) -->
+      <div id="adminDashboardView" style="display: none;">
+        
+        <!-- Header -->
+        <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 gap-2">
+          <div>
+            <h1 class="h3 fw-extrabold text-dark mb-1">Administrative Overview</h1>
+            <p class="text-muted mb-0">Manage destination database records and examine contact inquiries.</p>
+          </div>
+          <button type="button" class="btn btn-primary rounded-pill px-4 fw-bold shadow-sm" data-bs-toggle="modal" data-bs-target="#destinationModal" onclick="openAddModal()">
+            <i class="fas fa-plus me-2"></i>Add Destination
+          </button>
+        </div>
+
+        <!-- Metric Cards -->
+        <div class="row g-3 mb-4">
+          <div class="col-md-3 col-6">
+            <div class="p-3 bg-white rounded-3 border shadow-sm">
+              <div class="text-muted small fw-bold">TOTAL DESTINATIONS</div>
+              <div class="h3 fw-extrabold text-primary mb-0" id="dashTotalDest">0</div>
+            </div>
+          </div>
+          <div class="col-md-3 col-6">
+            <div class="p-3 bg-white rounded-3 border shadow-sm">
+              <div class="text-muted small fw-bold">TOTAL CATEGORIES</div>
+              <div class="h3 fw-extrabold text-success mb-0" id="dashTotalCat">0</div>
+            </div>
+          </div>
+          <div class="col-md-3 col-6">
+            <div class="p-3 bg-white rounded-3 border shadow-sm">
+              <div class="text-muted small fw-bold">STATES COVERED</div>
+              <div class="h3 fw-extrabold text-warning mb-0" id="dashTotalStates">0</div>
+            </div>
+          </div>
+          <div class="col-md-3 col-6">
+            <div class="p-3 bg-white rounded-3 border shadow-sm">
+              <div class="text-muted small fw-bold">VISITOR MESSAGES</div>
+              <div class="h3 fw-extrabold text-info mb-0" id="dashTotalMsgs">0</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <ul class="nav nav-pills mb-4" id="adminTabs" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active fw-bold" id="dests-tab" data-bs-toggle="pill" data-bs-target="#destsTabContent" type="button" role="tab">
+              <i class="fas fa-landmark me-1"></i> Destinations Directory (<span id="tabDestCount">0</span>)
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link fw-bold" id="msgs-tab" data-bs-toggle="pill" data-bs-target="#msgsTabContent" type="button" role="tab">
+              <i class="fas fa-inbox me-1"></i> Contact Inquiries (<span id="tabMsgCount">0</span>)
+            </button>
+          </li>
+        </ul>
+
+        <!-- Tab Contents -->
+        <div class="tab-content" id="adminTabsContent">
+          
+          <!-- Destinations Table Tab -->
+          <div class="tab-pane fade show active" id="destsTabContent" role="tabpanel">
+            <div class="bg-white rounded-4 border shadow-sm p-4">
+              <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                  <thead class="table-light">
+                    <tr>
+                      <th style="width: 60px;">ID</th>
+                      <th>Attraction</th>
+                      <th>City, State</th>
+                      <th>Category</th>
+                      <th>Timings</th>
+                      <th>Entry Fee</th>
+                      <th class="text-end" style="width: 140px;">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody id="adminDestTableBody">
+                    <!-- Populated via admin.js -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Messages Table Tab -->
+          <div class="tab-pane fade" id="msgsTabContent" role="tabpanel">
+            <div class="bg-white rounded-4 border shadow-sm p-4">
+              <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                  <thead class="table-light">
+                    <tr>
+                      <th>ID</th>
+                      <th>Date</th>
+                      <th>Sender Name</th>
+                      <th>Email</th>
+                      <th>Subject</th>
+                      <th>Message</th>
+                    </tr>
+                  </thead>
+                  <tbody id="adminMsgsTableBody">
+                    <!-- Populated via admin.js -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Add/Edit Destination Modal -->
+  <div class="modal fade" id="destinationModal" tabindex="-1" aria-labelledby="destinationModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content rounded-4 border-0 shadow-lg">
+        <div class="modal-header bg-primary text-white">
+          <h5 class="modal-title fw-bold" id="destinationModalLabel">Add New Destination</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body p-4">
+          <div id="modalAlert" class="alert alert-danger py-2 small" style="display: none;"></div>
+
+          <form id="destinationForm" novalidate>
+            <input type="hidden" id="destFormId" value="">
+
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label for="destFormName" class="form-label small fw-bold">Attraction Name *</label>
+                <input type="text" class="form-control" id="destFormName" required placeholder="e.g. Charminar">
+              </div>
+
+              <div class="col-md-6">
+                <label for="destFormCategory" class="form-label small fw-bold">Category *</label>
+                <select class="form-select" id="destFormCategory" required>
+                  <option value="Historical Monuments">Historical Monuments</option>
+                  <option value="Temples and Religious Places">Temples and Religious Places</option>
+                  <option value="Beaches">Beaches</option>
+                  <option value="Hill Stations">Hill Stations</option>
+                  <option value="Waterfalls">Waterfalls</option>
+                  <option value="Wildlife Sanctuaries">Wildlife Sanctuaries</option>
+                  <option value="Museums">Museums</option>
+                  <option value="Adventure Destinations">Adventure Destinations</option>
+                  <option value="Lakes and Natural Attractions">Lakes and Natural Attractions</option>
+                </select>
+              </div>
+
+              <div class="col-md-6">
+                <label for="destFormCity" class="form-label small fw-bold">City *</label>
+                <input type="text" class="form-control" id="destFormCity" required placeholder="e.g. Hyderabad">
+              </div>
+
+              <div class="col-md-6">
+                <label for="destFormState" class="form-label small fw-bold">State *</label>
+                <input type="text" class="form-control" id="destFormState" required placeholder="e.g. Telangana">
+              </div>
+
+              <div class="col-12">
+                <label for="destFormAddress" class="form-label small fw-bold">Full Address</label>
+                <input type="text" class="form-control" id="destFormAddress" placeholder="Street address or locality">
+              </div>
+
+              <div class="col-12">
+                <label for="destFormDesc" class="form-label small fw-bold">Detailed Description *</label>
+                <textarea class="form-control" id="destFormDesc" rows="3" required placeholder="Describe history, architecture, and significance"></textarea>
+              </div>
+
+              <div class="col-12">
+                <label for="destFormImageUrl" class="form-label small fw-bold">Main Image URL *</label>
+                <input type="url" class="form-control" id="destFormImageUrl" required placeholder="https://images.unsplash.com/...">
+              </div>
+
+              <div class="col-md-6">
+                <label for="destFormTimings" class="form-label small fw-bold">Visiting Hours</label>
+                <input type="text" class="form-control" id="destFormTimings" placeholder="e.g. 09:00 AM – 05:30 PM">
+              </div>
+
+              <div class="col-md-6">
+                <label for="destFormEntryFee" class="form-label small fw-bold">Entry Fee</label>
+                <input type="text" class="form-control" id="destFormEntryFee" placeholder="e.g. ₹25 for Indians, ₹300 for Foreigners">
+              </div>
+
+              <div class="col-md-6">
+                <label for="destFormBestTime" class="form-label small fw-bold">Best Time to Visit</label>
+                <input type="text" class="form-control" id="destFormBestTime" placeholder="e.g. October to March">
+              </div>
+
+              <div class="col-md-6">
+                <label for="destFormDuration" class="form-label small fw-bold">Recommended Duration</label>
+                <input type="text" class="form-control" id="destFormDuration" placeholder="e.g. 2 to 3 hours">
+              </div>
+
+              <div class="col-md-6">
+                <label for="destFormLat" class="form-label small fw-bold">Latitude</label>
+                <input type="number" step="any" class="form-control" id="destFormLat" placeholder="e.g. 17.3616">
+              </div>
+
+              <div class="col-md-6">
+                <label for="destFormLong" class="form-label small fw-bold">Longitude</label>
+                <input type="number" step="any" class="form-control" id="destFormLong" placeholder="e.g. 78.4747">
+              </div>
+
+              <div class="col-12">
+                <label for="destFormFacilities" class="form-label small fw-bold">Facilities (comma-separated)</label>
+                <input type="text" class="form-control" id="destFormFacilities" placeholder="Parking, Restrooms, Drinking Water, Guided Tours">
+              </div>
+
+              <div class="col-12">
+                <label for="destFormTips" class="form-label small fw-bold">Visitor Travel Tips</label>
+                <textarea class="form-control" id="destFormTips" rows="2" placeholder="Practical tips for travelers"></textarea>
+              </div>
+
+              <div class="col-12">
+                <label for="destFormNearby" class="form-label small fw-bold">Nearby Attractions (comma-separated)</label>
+                <input type="text" class="form-control" id="destFormNearby" placeholder="Nearby landmarks and sights">
+              </div>
+            </div>
+
+            <div class="modal-footer px-0 pb-0 mt-4">
+              <button type="button" class="btn btn-secondary rounded-pill px-4" data-bs-dismiss="modal">Cancel</button>
+              <button type="submit" id="saveDestModalBtn" class="btn btn-primary rounded-pill px-4 fw-bold">
+                <i class="fas fa-save me-1"></i> Save Destination
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Delete Confirmation Modal -->
+  <div class="modal fade" id="deleteConfirmModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content rounded-4 border-0 shadow">
+        <div class="modal-body p-4 text-center">
+          <div class="brand-icon-wrapper mx-auto mb-3" style="width: 60px; height: 60px; font-size: 1.5rem; background: #fee2e2; color: #ef4444;">
+            <i class="fas fa-trash-alt"></i>
+          </div>
+          <h4 class="fw-bold text-dark mb-2">Delete Destination?</h4>
+          <p class="text-muted small mb-4">
+            Are you sure you want to permanently delete <strong id="deleteDestNamePrompt">this destination</strong> from the SQLite database? This action cannot be undone.
+          </p>
+          <div class="d-flex justify-content-center gap-2">
+            <button type="button" class="btn btn-light rounded-pill px-4" data-bs-dismiss="modal">Cancel</button>
+            <button type="button" id="confirmDeleteBtn" class="btn btn-danger rounded-pill px-4 fw-bold">
+              Yes, Delete Record
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- API Service & Global Scripts -->
+  <script src="js/api.js"></script>
+  <script src="js/app.js"></script>
+  <!-- Admin Controller Script -->
+  <script src="js/admin.js"></script>
+</body>
+</html>
