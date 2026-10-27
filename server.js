@@ -241,7 +241,7 @@ if (require.main === module) {
   server = app.listen(PORT, () => {
     console.log(`=======================================================`);
     console.log(`  Tourist Attraction Information Service Portal`);
-    console.log(`  College Academic Project - Live Web Application`);
+    console.log(`  Destination Information Guide - Live Web Application`);
     console.log(`=======================================================`);
     console.log(`  Local Address:  http://localhost:${PORT}`);
     console.log(`  API Health:     http://localhost:${PORT}/api/health`);

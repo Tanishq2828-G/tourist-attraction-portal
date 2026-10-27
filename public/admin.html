@@ -8,33 +8,21 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <!-- Simple Custom Styles -->
+  <!-- Minimal Stylesheet -->
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-  <!-- College Top Bar -->
-  <div class="college-top-bar">
-    <div class="container d-flex justify-content-between align-items-center">
-      <div>
-        <i class="fas fa-graduation-cap me-1"></i> <strong>College Academic Project:</strong> Tourist Attraction Information Service Portal
-      </div>
-      <div class="d-none d-md-block">
-        Administrator Console
-      </div>
-    </div>
-  </div>
-
-  <!-- Navigation Bar -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom sticky-top">
+  <!-- Top Navigation Bar -->
+  <nav class="navbar navbar-expand-lg navbar-custom sticky-top">
     <div class="container">
       <a class="navbar-brand d-flex align-items-center" href="index.html">
-        <div class="p-2 bg-primary text-white rounded me-2">
-          <i class="fas fa-user-lock fa-lg"></i>
+        <div class="me-2 text-primary">
+          <i class="fas fa-user-lock fa-2x"></i>
         </div>
         <div>
-          <span class="navbar-brand-title">Admin Management</span>
-          <span class="navbar-brand-sub">Tourist Portal Administration</span>
+          <span class="brand-title">Portal Administration</span>
+          <span class="brand-subtitle">Management Console</span>
         </div>
       </a>
 
@@ -42,7 +30,7 @@
         <a href="index.html" class="btn btn-outline-secondary btn-sm">
           <i class="fas fa-arrow-left me-1"></i> Back to Website
         </a>
-        <button id="adminLogoutBtn" class="btn btn-danger btn-sm" style="display: none;">
+        <button id="adminLogoutBtn" class="btn btn-outline-danger btn-sm" style="display: none;">
           <i class="fas fa-sign-out-alt me-1"></i> Logout
         </button>
       </div>
@@ -56,17 +44,17 @@
       <div id="adminLoginGate" class="row justify-content-center py-5">
         <div class="col-md-5">
           <div class="bg-white p-4 border rounded shadow-sm text-center">
-            <i class="fas fa-lock fa-3x text-primary mb-3"></i>
-            <h4 class="fw-bold mb-2">Administrator Login</h4>
+            <i class="fas fa-lock fa-2x text-primary mb-3"></i>
+            <h5 class="fw-bold mb-1">Administrator Login</h5>
             <p class="text-muted small mb-4">
-              Enter the administrator secret key to manage attraction records and view visitor contact messages.
+              Enter the administrator secret key to manage attraction records and view visitor messages.
             </p>
 
             <div id="adminLoginAlert" class="alert alert-danger py-2 small" style="display: none;"></div>
 
             <form id="adminLoginForm">
               <div class="mb-3 text-start">
-                <label for="adminKeyInput" class="form-label small fw-bold">Admin Secret Key</label>
+                <label for="adminKeyInput" class="form-label small fw-bold text-muted">Admin Secret Key</label>
                 <input 
                   type="password" 
                   id="adminKeyInput" 
@@ -74,11 +62,10 @@
                   placeholder="Enter admin key (default: admin123)" 
                   required
                 >
-                <div class="form-text small text-muted">Configured in server <code>.env</code> file (ADMIN_KEY).</div>
               </div>
 
-              <button type="submit" id="adminLoginSubmitBtn" class="btn btn-primary w-100 fw-bold">
-                <i class="fas fa-unlock me-1"></i> Log In
+              <button type="submit" id="adminLoginSubmitBtn" class="btn btn-primary w-100 fw-medium">
+                Log In
               </button>
             </form>
           </div>
@@ -92,9 +79,9 @@
         <div class="d-flex flex-wrap justify-content-between align-items-center mb-4">
           <div>
             <h2 class="h4 fw-bold text-dark mb-1">Administrative Overview</h2>
-            <p class="text-muted small mb-0">Manage destination database records and examine contact inquiries.</p>
+            <p class="text-muted small mb-0">Manage destination records and examine visitor contact inquiries.</p>
           </div>
-          <button type="button" class="btn btn-primary btn-sm fw-bold" data-bs-toggle="modal" data-bs-target="#destinationModal" onclick="openAddModal()">
+          <button type="button" class="btn btn-primary btn-sm fw-medium" data-bs-toggle="modal" data-bs-target="#destinationModal" onclick="openAddModal()">
             <i class="fas fa-plus me-1"></i> Add Destination
           </button>
         </div>
@@ -104,25 +91,25 @@
           <div class="col-md-3 col-6">
             <div class="bg-white p-3 border rounded shadow-sm">
               <div class="text-muted small fw-bold">TOTAL DESTINATIONS</div>
-              <div class="h3 fw-bold text-primary mb-0" id="dashTotalDest">0</div>
+              <div class="h4 fw-bold text-primary mb-0" id="dashTotalDest">0</div>
             </div>
           </div>
           <div class="col-md-3 col-6">
             <div class="bg-white p-3 border rounded shadow-sm">
               <div class="text-muted small fw-bold">TOTAL CATEGORIES</div>
-              <div class="h3 fw-bold text-success mb-0" id="dashTotalCat">0</div>
+              <div class="h4 fw-bold text-success mb-0" id="dashTotalCat">0</div>
             </div>
           </div>
           <div class="col-md-3 col-6">
             <div class="bg-white p-3 border rounded shadow-sm">
               <div class="text-muted small fw-bold">STATES COVERED</div>
-              <div class="h3 fw-bold text-warning mb-0" id="dashTotalStates">0</div>
+              <div class="h4 fw-bold text-warning mb-0" id="dashTotalStates">0</div>
             </div>
           </div>
           <div class="col-md-3 col-6">
             <div class="bg-white p-3 border rounded shadow-sm">
               <div class="text-muted small fw-bold">VISITOR MESSAGES</div>
-              <div class="h3 fw-bold text-info mb-0" id="dashTotalMsgs">0</div>
+              <div class="h4 fw-bold text-info mb-0" id="dashTotalMsgs">0</div>
             </div>
           </div>
         </div>
@@ -130,13 +117,13 @@
         <!-- Tabs -->
         <ul class="nav nav-tabs mb-3" id="adminTabs" role="tablist">
           <li class="nav-item">
-            <button class="nav-link active fw-bold small" id="dests-tab" data-bs-toggle="tab" data-bs-target="#destsTabContent" type="button">
-              <i class="fas fa-landmark me-1"></i> Destinations Directory (<span id="tabDestCount">0</span>)
+            <button class="nav-link active fw-medium small" id="dests-tab" data-bs-toggle="tab" data-bs-target="#destsTabContent" type="button">
+              Destinations Directory (<span id="tabDestCount">0</span>)
             </button>
           </li>
           <li class="nav-item">
-            <button class="nav-link fw-bold small" id="msgs-tab" data-bs-toggle="tab" data-bs-target="#msgsTabContent" type="button">
-              <i class="fas fa-inbox me-1"></i> Contact Inquiries (<span id="tabMsgCount">0</span>)
+            <button class="nav-link fw-medium small" id="msgs-tab" data-bs-toggle="tab" data-bs-target="#msgsTabContent" type="button">
+              Contact Inquiries (<span id="tabMsgCount">0</span>)
             </button>
           </li>
         </ul>
@@ -196,9 +183,9 @@
   <div class="modal fade" id="destinationModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
-        <div class="modal-header bg-primary text-white">
+        <div class="modal-header">
           <h5 class="modal-title fw-bold" id="destinationModalLabel">Add Destination</h5>
-          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
         <div class="modal-body p-4">
           <div id="modalAlert" class="alert alert-danger py-2 small" style="display: none;"></div>
@@ -300,7 +287,7 @@
 
             <div class="modal-footer px-0 pb-0 mt-3">
               <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancel</button>
-              <button type="submit" class="btn btn-primary btn-sm fw-bold">Save Destination</button>
+              <button type="submit" class="btn btn-primary btn-sm fw-medium">Save Destination</button>
             </div>
           </form>
         </div>
@@ -316,7 +303,7 @@
           <i class="fas fa-trash-alt fa-2x text-danger mb-2"></i>
           <h5 class="fw-bold">Delete Destination?</h5>
           <p class="text-muted small mb-3">
-            Are you sure you want to delete <strong id="deleteDestNamePrompt">this record</strong> from the SQLite database?
+            Are you sure you want to delete <strong id="deleteDestNamePrompt">this record</strong> from the database?
           </p>
           <div class="d-flex justify-content-center gap-2">
             <button type="button" class="btn btn-light btn-sm" data-bs-dismiss="modal">Cancel</button>

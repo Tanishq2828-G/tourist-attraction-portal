@@ -1,5 +1,5 @@
 /**
- * Destination Details View Logic - Simple & Student-Friendly
+ * Destination Details View Logic - Minimal & Clean
  * Fetches single destination data from API by ID and renders clean HTML.
  */
 
@@ -15,10 +15,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (container) {
       container.innerHTML = `
         <div class="text-center py-5">
-          <i class="fas fa-exclamation-circle fa-3x text-warning mb-3"></i>
-          <h4>No Destination Selected</h4>
-          <p class="text-muted">Please select an attraction from our catalog to see its details.</p>
-          <a href="destinations.html" class="btn btn-primary mt-2">Browse Destinations</a>
+          <i class="fas fa-exclamation-circle fa-2x text-warning mb-2"></i>
+          <h5>No Destination Selected</h5>
+          <p class="text-muted small">Please select an attraction from our catalog to view its details.</p>
+          <a href="destinations.html" class="btn btn-primary btn-sm">Browse Destinations</a>
         </div>
       `;
     }
@@ -43,7 +43,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     const galleryHtml = gallery.length > 1
       ? `
         <div class="mt-2 mb-3">
-          <small class="text-muted fw-bold d-block mb-1">More Photographs:</small>
           <div class="d-flex flex-wrap">
             ${gallery.map((url, idx) => `
               <img 
@@ -62,7 +61,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Render Facilities Badges
     const facilitiesList = Array.isArray(dest.facilities) ? dest.facilities : [];
     const facilitiesHtml = facilitiesList.length > 0
-      ? facilitiesList.map(f => `<span class="facility-badge"><i class="fas fa-check text-success me-1"></i>${f}</span>`).join('')
+      ? facilitiesList.map(f => `<span class="facility-pill"><i class="fas fa-check text-success me-1"></i>${f}</span>`).join('')
       : '<span class="text-muted small">Information not listed. Please check on arrival.</span>';
 
     // Render Nearby Attractions
@@ -95,7 +94,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             <span id="detailFavText">${isFav ? 'Saved in Favorites' : 'Add to Favorites'}</span>
           </button>
           <a href="${mapsUrl}" target="_blank" class="btn btn-sm btn-outline-primary">
-            <i class="fas fa-external-link-alt me-1"></i> Open Google Maps
+            <i class="fas fa-external-link-alt me-1"></i> Google Maps
           </a>
         </div>
       </div>
@@ -103,11 +102,11 @@ document.addEventListener('DOMContentLoaded', async () => {
       <div class="row">
         <!-- Left Column: Image, Description, Facilities -->
         <div class="col-lg-8">
-          <div class="info-box">
+          <div class="detail-box">
             <!-- Main Title & Badges -->
             <div class="d-flex flex-wrap align-items-center gap-2 mb-2">
-              <span class="badge bg-primary">${dest.category}</span>
-              <span class="badge bg-success"><i class="fas fa-map-marker-alt me-1"></i>${dest.city}, ${dest.state}</span>
+              <span class="badge bg-light text-dark border">${dest.category}</span>
+              <span class="badge bg-light text-success border"><i class="fas fa-map-marker-alt me-1"></i>${dest.city}, ${dest.state}</span>
             </div>
             
             <h1 class="h2 fw-bold text-dark mb-1">${dest.name}</h1>
@@ -125,71 +124,71 @@ document.addEventListener('DOMContentLoaded', async () => {
             ${galleryHtml}
 
             <!-- Detailed Description -->
-            <h4 class="fw-bold text-dark mt-4 mb-2"><i class="fas fa-align-left text-primary me-2"></i>About the Attraction</h4>
-            <p style="font-size: 1rem; color: #444; line-height: 1.7;">
+            <h5 class="fw-bold text-dark mt-4 mb-2">About the Attraction</h5>
+            <p style="font-size: 0.95rem; color: #4b5563; line-height: 1.7;">
               ${dest.description}
             </p>
 
             <!-- Travel Tips Box -->
             ${dest.travel_tips ? `
               <div class="bg-light p-3 rounded border my-3">
-                <h5 class="fw-bold mb-1 text-dark"><i class="fas fa-lightbulb text-warning me-2"></i>Travel Tips</h5>
-                <p class="small text-muted mb-0">${dest.travel_tips}</p>
+                <div class="fw-bold text-dark small mb-1"><i class="fas fa-lightbulb text-warning me-1"></i> Visitor Tips:</div>
+                <div class="small text-muted">${dest.travel_tips}</div>
               </div>
             ` : ''}
 
             <!-- Available Facilities -->
-            <h4 class="fw-bold text-dark mt-4 mb-2"><i class="fas fa-concierge-bell text-success me-2"></i>Available Facilities</h4>
+            <h5 class="fw-bold text-dark mt-4 mb-2">Available Facilities</h5>
             <div class="d-flex flex-wrap mb-3">
               ${facilitiesHtml}
             </div>
 
             <!-- Nearby Attractions -->
-            <h4 class="fw-bold text-dark mt-4 mb-2"><i class="fas fa-compass text-primary me-2"></i>Nearby Attractions</h4>
+            <h5 class="fw-bold text-dark mt-4 mb-2">Nearby Landmarks</h5>
             <div class="d-flex flex-wrap mb-2">
               ${nearbyHtml}
             </div>
 
             <!-- Verification Notice -->
-            <div class="verification-notice">
-              <i class="fas fa-exclamation-triangle me-1"></i>
-              <strong>Notice:</strong> Information provided is for educational & academic project purposes. Official visiting hours, admission tickets, and seasonal schedules should be verified before visiting.
+            <div class="simple-notice">
+              <i class="fas fa-info-circle me-1"></i>
+              <strong>Notice:</strong> Information provided is for general tourist guidance. Official visiting hours, admission fees, and seasonal schedules are subject to change by local authorities. Please verify before visiting.
             </div>
           </div>
         </div>
 
         <!-- Right Column: Key Visitor Facts -->
         <div class="col-lg-4">
-          <div class="info-box">
-            <h4 class="h5 fw-bold text-dark border-bottom pb-2 mb-3">
-              <i class="fas fa-clipboard-list text-primary me-2"></i>Visitor Information
-            </h4>
+          <div class="detail-box">
+            <h5 class="fw-bold text-dark border-bottom pb-2 mb-3">
+              Visitor Information
+            </h5>
 
             <table class="table table-sm info-table mb-3">
               <tbody>
                 <tr>
-                  <th><i class="far fa-clock text-primary me-1"></i> Timings</th>
+                  <th>Timings</th>
                   <td>${dest.opening_hours || 'Please verify before visiting'}</td>
                 </tr>
                 <tr>
-                  <th><i class="fas fa-ticket-alt text-primary me-1"></i> Entry Fee</th>
+                  <th>Entry Fee</th>
                   <td>${dest.entry_fee || 'Please verify before visiting'}</td>
                 </tr>
                 <tr>
-                  <th><i class="fas fa-calendar-alt text-primary me-1"></i> Best Time</th>
+                  <th>Best Season</th>
                   <td>${dest.best_time_to_visit || 'October to March'}</td>
                 </tr>
                 <tr>
-                  <th><i class="fas fa-hourglass-half text-primary me-1"></i> Duration</th>
+                  <th>Duration</th>
                   <td>${dest.recommended_duration || '2 to 3 hours'}</td>
                 </tr>
                 <tr>
-                  <th><i class="fas fa-wheelchair text-primary me-1"></i> Accessibility</th>
+                  <th>Accessibility</th>
                   <td class="small">${dest.accessibility || 'Please verify before visiting'}</td>
                 </tr>
                 ${dest.latitude && dest.longitude ? `
                   <tr>
-                    <th><i class="fas fa-map-pin text-primary me-1"></i> Coordinates</th>
+                    <th>Coordinates</th>
                     <td class="font-monospace small">${dest.latitude}° N, ${dest.longitude}° E</td>
                   </tr>
                 ` : ''}
@@ -197,8 +196,8 @@ document.addEventListener('DOMContentLoaded', async () => {
             </table>
 
             <div class="d-grid gap-2">
-              <a href="${mapsUrl}" target="_blank" class="btn btn-primary fw-bold">
-                <i class="fas fa-map-marked-alt me-1"></i> View on Google Maps
+              <a href="${mapsUrl}" target="_blank" class="btn btn-primary btn-sm fw-medium">
+                <i class="fas fa-directions me-1"></i> Directions on Google Maps
               </a>
               <a href="destinations.html?category=${encodeURIComponent(dest.category)}" class="btn btn-outline-secondary btn-sm">
                 More in ${dest.category}
